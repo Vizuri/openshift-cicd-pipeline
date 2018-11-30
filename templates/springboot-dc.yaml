@@ -31,19 +31,19 @@ parameters:
   value: 100m
 - description: Database Host
   name: DATABASE_HOST
-  value: fhirdb
+  value: customerdb
 - description: Database Port
   name: DATABASE_PORT
   value: "27017"
 - description: Database Db
   name: DATABASE_DB
-  value: fhir
+  value: customer
 - description: Database Username
   name: DATABASE_USER
-  value: fhir
+  value: customer
 - description: Database Password
   name: DATABASE_PASSWORD
-  value: fhir
+  value: customer
 objects:
 - apiVersion: v1
   kind: Route
