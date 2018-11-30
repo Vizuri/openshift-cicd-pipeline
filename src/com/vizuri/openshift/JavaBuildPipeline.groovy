@@ -3,56 +3,50 @@ package com.vizuri.openshift
 
 
 def call(body) {
-	def utils = new com.vizuri.openshift.Utils();
+	def steps = new com.vizuri.openshift.PipelineSteps();
 	def pipelineParams= [:]
 	body.resolveStrategy = Closure.DELEGATE_FIRST
 	body.delegate = pipelineParams
 	body()
-	
+
 	pipeline {
-		environment {
-			RELEASE_NUMBER = "";
+		environment { 
+			RELEASE_NUMBER = ""; 			
+			OCP_APP_SUFFIX = pipelineParams.ocpAppSuffix;
+			IMAGE_BASE = pipelineParams.imageBase;
+			IMAGE_NAMESPACE = pipelineParams.imageBase;
+			REGISTRY_USERNAME = pipelineParams.registryUsername;
+			REGISTRY_PASSWORD = pipelineParams.registryPassword;			
+			CONTAINER_REGISTRY = "https://${pipelineParams.imageBase}"
+			NEXUS_URL = "http://nexus-${REGISTRY_USERNAME}-cicd.${ocpAppSuffix}"	
 		}
-		node {
-			checkout scm;
-		}
-		
-		def projectFolder;
-		if(pipelineParams.project_folder) {
-			echo "setting project_folder: ${pipelineParams.project_folder}"
-			projectFolder = pipelineParams.project_folder
-		}
-		else {
-			echo "setting project_folder: default"
-			projectFolder = "./"
-		}
-	
-		try {
-			println ">>>> Starting JavaDeliveryPipeline";
-			utils.init(projectFolder);
-			echo "utils.isFeature():utils.isRelease():utils.isDevelop():${env.RELEASE_NUMBER}"
-		
-			if( utils.isFeature() || utils.isDevelop() || utils.isRelease()) {
-				node('maven') {
-					utils.buildJava(projectFolder)
-					utils.testJava(projectFolder)
-					//utils.analyzeJava(projectFolder)
-					stash name: 'artifacts'
-				}
+		node ("maven-podman") {
+			steps.checkout()
+			def projectFolder;
+			if(pipelineParams.project_folder) {
+				echo "setting project_folder: ${pipelineParams.project_folder}"
+				projectFolder = pipelineParams.project_folder
 			}
-			
-			if(utils.isRelease() ||  utils.isDevelop()) {
-				node ('maven') {
-					unstash 'artifacts'
-					utils.deployJava(projectFolder)
-				}
+			else {
+				echo "setting project_folder: default"
+				projectFolder = "./"
 			}
 
-		} catch (e) {
-			currentBuild.result = "FAILED"
-			throw e
-		} finally {
-			utils.notifyBuild(currentBuild.result)
+			try {
+				steps.buildJava(projectFolder)
+				steps.testJava(projectFolder)
+				steps.analyzeJava(projectFolder)
+
+				if (BRANCH_NAME ==~ /(develop|release.*)/) {
+					steps.deployJava(projectFolder)
+
+				}
+			} catch (e) {
+				currentBuild.result = "FAILED"
+				throw e
+			} finally {
+				//steps.notifyBuild(currentBuild.result)
+			}
 		}
 	}
 }
