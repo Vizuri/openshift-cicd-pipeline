@@ -214,7 +214,7 @@ def deployOpenshift(ocp_cluster, ocp_project, app_name) {
 				if(!dc.exists()) {
 					echo "DC Does Not Exist Creating"
 					//dc = openshift.newApp("-f https://raw.githubusercontent.com/Vizuri/openshift-pipeline-templates/master/templates/springboot-dc.yaml -p IMAGE_NAME=${env.IMAGE_BASE}/${ocp_project}/${app_name}:latest -p APP_NAME=${app_name}").narrow("dc")
-					dc = openshift.newApp("-f https://raw.githubusercontent.com/Vizuri/openshift-pipeline-templates/master/templates/springboot-dc.yaml -p IMAGE_NAME=${env.IMAGE_BASE}/${env.IMAGE_NAMESPACE}/${app_name}:${tag} -p APP_NAME=${app_name}").narrow("dc")
+					dc = openshift.newApp("-f https://raw.githubusercontent.com/Vizuri/openshift-cicd-pipeline/master/templates/springboot-dc.yaml -p IMAGE_NAME=${env.IMAGE_BASE}/${env.IMAGE_NAMESPACE}/${app_name}:${tag} -p APP_NAME=${app_name}").narrow("dc")
 				}
 				else {
 					def dcObject = dc.object()
