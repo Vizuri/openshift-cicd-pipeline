@@ -1,0 +1,17 @@
+#!/usr/bin/groovy
+@Library('github.com/vizuri/openshift-pipeline-templates@master')
+
+def utils = new com.vizuri.openshift.Utils();
+
+def javaDeliveryPipeline = new com.vizuri.openshift.JavaDeliveryPipeline();
+
+javaDeliveryPipeline {
+	app_name = 'fhir-patient-service'
+	project_folder = 'fhir-patient-service'
+	ocp_dev_cluster = 'aws-ocp-02'
+	ocp_dev_project = 'fhir-development'
+	ocp_test_cluster = 'aws-ocp-02'
+	ocp_test_project = 'fhir-test'
+	ocp_prod_cluster = 'aws-ocp-02'
+	ocp_prod_project = 'fhir-prod'
+}

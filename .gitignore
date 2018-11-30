@@ -1,0 +1,14 @@
+.classpath
+.settings/
+.project
+.idea/
+out/
+.gradle
+build/
+target/
+.classpath
+./settings/
+.project
+data/
+/bin/
+/.metadata/

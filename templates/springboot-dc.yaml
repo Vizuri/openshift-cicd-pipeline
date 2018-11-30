@@ -1,0 +1,127 @@
+apiVersion: v1
+kind: Template
+metadata:
+  name: springboot-dc
+parameters:
+- name: APP_NAME
+  description: The name assigned to all of the application objects defined in this template.
+  displayName: Application Name
+  required: true
+- description: The exposed hostname that will route to the service, if left blank a value will be defaulted
+  displayName: Application Hostname
+  name: APPLICATION_DOMAIN
+- description: The container image name to deploy
+  displayName: Image Name
+  name: IMAGE_NAME
+- description: The exposed hostname that will route to the service, if left blank a value will be defaulted
+  displayName: Java Optsions
+  name: JAVA_OPTIONS
+  value: "-Xms128m -Xmx256m -Dspring.profiles.active=openshift"
+- description: POD Memory Limit
+  name: MEMORY_LIMIT
+  value: 312Mi
+- description: POD CPU Limit
+  name: CPU_LIMIT
+  value: 750m
+- description: POD Memory Request
+  name: MEMORY_REQUEST
+  value: 256Mi
+- description: POD CPU Request
+  name: CPU_REQUEST
+  value: 100m
+- description: Database Host
+  name: DATABASE_HOST
+  value: fhirdb
+- description: Database Port
+  name: DATABASE_PORT
+  value: "27017"
+- description: Database Db
+  name: DATABASE_DB
+  value: fhir
+- description: Database Username
+  name: DATABASE_USER
+  value: fhir
+- description: Database Password
+  name: DATABASE_PASSWORD
+  value: fhir
+objects:
+- apiVersion: v1
+  kind: Route
+  metadata:
+    labels:
+      app: ${APP_NAME}
+      name: ${APP_NAME}
+    name: ${APP_NAME}
+  spec:
+    host: ${APPLICATION_DOMAIN}
+    port:
+      targetPort: web
+    to:
+      kind: Service
+      name: ${APP_NAME}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: null
+    name: ${APP_NAME}
+  spec:
+    portalIP: ""
+    ports:
+    - name: web
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      name: ${APP_NAME}
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: "v1"
+  kind: "DeploymentConfig"
+  metadata:
+    name: "${APP_NAME}"
+  spec:
+    replicas: 1
+    strategy:
+      type: "Rolling"
+    template:
+      metadata:
+        labels:
+          name: "${APP_NAME}"
+          deploymentconfig: "${APP_NAME}"
+      spec:
+        containers:
+        - args:
+          env:
+          - name: JAVA_OPTIONS
+            value: '${JAVA_OPTIONS}'
+          - name: MONGO_DATABASE_HOST
+            value: '${DATABASE_HOST}'
+          - name: MONGO_DATABASE_PORT
+            value: '${DATABASE_PORT}'
+          - name: MONGO_DATABASE_DB
+            value: '${DATABASE_DB}'
+          - name: MONGO_DATABASE_USER
+            value: '${DATABASE_USER}'
+          - name: MONGO_DATABASE_PASSWORD
+            value: '${DATABASE_PASSWORD}'
+          image: ${IMAGE_NAME}
+          imagePullPolicy: "Always"
+          name: "${APP_NAME}"
+          readinessProbe:
+          livenessProbe:
+          ports:
+          - name: web
+            containerPort: 8080
+            protocol: TCP
+          - name: jolokia
+            containerPort: 8778
+            protocol: TCP
+          resources:
+            limits:
+            requests:
+              cpu: ${CPU_REQUEST}
+              memory: ${MEMORY_REQUEST}
+          securityContext:
+          terminationMessagePath: "/dev/termination-log"
+          volumeMounts:
+    triggers: []
