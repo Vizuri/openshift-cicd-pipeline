@@ -129,8 +129,7 @@ def scanImage(app_name, projectFolder = "./") {
 	def tag = "${env.RELEASE_NUMBER}"
 	stage('Container Scan') {
 		writeFile file: 'anchore_images', text: "${env.IMAGE_BASE}/${env.IMAGE_NAMESPACE}/${app_name}:${tag} ${projectFolder}/Dockerfile"
-		sh 'cat anchore_images'
-		anchore name: 'anchore_images'
+		anchore engineRetries: '800', name: 'anchore_images'
 	}
 }
 def podmanPush(app_name) {
