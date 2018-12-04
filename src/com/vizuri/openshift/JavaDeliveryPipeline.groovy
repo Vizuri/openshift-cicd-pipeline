@@ -14,7 +14,7 @@ def call(body) {
 			RELEASE_NUMBER = ""; 			
 			OCP_APP_SUFFIX = pipelineParams.ocpAppSuffix;
 			IMAGE_BASE = pipelineParams.imageBase;
-			IMAGE_NAMESPACE = pipelineParams.imageBase;
+			IMAGE_NAMESPACE = pipelineParams.imageNamespace;
 			REGISTRY_USERNAME = pipelineParams.registryUsername;
 			REGISTRY_PASSWORD = pipelineParams.registryPassword;			
 			CONTAINER_REGISTRY = "https://${pipelineParams.imageBase}"
