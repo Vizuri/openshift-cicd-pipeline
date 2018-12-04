@@ -30,7 +30,7 @@ def call(body) {
 			}
 			else {
 				echo "setting project_folder: default"
-				projectFolder = "./"
+				projectFolder = "."
 			}
 
 			try {
