@@ -56,7 +56,7 @@ def testJava(projectFolder = ".") {
 		
 		sh "ls ${projectFolder}/target/surefire-reports/*.xml"
 		
-		junit "${projectFolder}/target/surefire-reports/*.xml"
+		junit "target/surefire-reports/*.xml"
 		
 		echo "After Junit"
 
