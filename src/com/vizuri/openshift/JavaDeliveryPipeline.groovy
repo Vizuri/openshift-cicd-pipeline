@@ -21,6 +21,7 @@ def call(body) {
 			NEXUS_URL = ""	
 		}
 		node ("maven-podman") {
+			steps.setEnv(pipelineParams);
 			steps.checkout()
 			def projectFolder;
 			if(pipelineParams.project_folder) {
