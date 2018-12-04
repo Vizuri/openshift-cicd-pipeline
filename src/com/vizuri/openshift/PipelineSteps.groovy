@@ -41,10 +41,7 @@ def checkout() {
 def buildJava(projectFolder = "./") {
 	def nexusUrl = env.NEXUS_URL;
 	echo "In buildJava: ${env.RELEASE_NUMBER} : ${env.NEXUS_URL}"
-	stage('Checkout') {
-		echo "In checkout"
-		checkout scm
-	}
+
 	stage('Build') {
 		echo "In Build"
 		sh "mvn -s configuration/settings.xml -Dnexus.url=${nexusUrl} -f ${projectFolder} -DskipTests=true -Dbuild.number=${env.RELEASE_NUMBER} clean install"
@@ -56,6 +53,9 @@ def testJava(projectFolder = "./") {
 	echo "In testJava: ${env.RELEASE_NUMBER}"
 	stage ('Unit Test') {
 		sh "mvn -s configuration/settings.xml -Dnexus.url=${nexusUrl} -f ${projectFolder} -Dbuild.number=${env.RELEASE_NUMBER} test"
+		
+		sh "ls ${projectFolder}/target/surefire-reports"
+		
 		junit "${projectFolder}/target/surefire-reports/*.xml"
 
 		step([$class: 'XUnitBuilder',
