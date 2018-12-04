@@ -30,7 +30,7 @@ def checkout() {
 
 def buildJava(projectFolder = "./") {
 	def nexusUrl = env.NEXUS_URL;
-	echo "In buildJava: ${env.RELEASE_NUMBER}"
+	echo "In buildJava: ${env.RELEASE_NUMBER} : ${env.NEXUS_URL}"
 	stage('Checkout') {
 		echo "In checkout"
 		checkout scm
