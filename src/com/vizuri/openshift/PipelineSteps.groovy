@@ -38,7 +38,7 @@ def checkout() {
 
 
 
-def buildJava(projectFolder = "./") {
+def buildJava(projectFolder = ".") {
 	def nexusUrl = env.NEXUS_URL;
 	echo "In buildJava: ${env.RELEASE_NUMBER} : ${env.NEXUS_URL}"
 
@@ -47,14 +47,14 @@ def buildJava(projectFolder = "./") {
 		sh "mvn -s configuration/settings.xml -Dnexus.url=${nexusUrl} -f ${projectFolder} -DskipTests=true -Dbuild.number=${env.RELEASE_NUMBER} clean install"
 	}
 }
-def testJava(projectFolder = "./") {
+def testJava(projectFolder = ".") {
 	def nexusUrl = env.NEXUS_URL;
 
 	echo "In testJava: ${env.RELEASE_NUMBER}"
 	stage ('Unit Test') {
 		sh "mvn -s configuration/settings.xml -Dnexus.url=${nexusUrl} -f ${projectFolder} -Dbuild.number=${env.RELEASE_NUMBER} test"
 		
-		sh "ls ${projectFolder}/target/surefire-reports"
+		sh "ls ${projectFolder}/target/surefire-reports/.*.xml"
 		
 		junit "${projectFolder}/target/surefire-reports/*.xml"
 
@@ -67,7 +67,7 @@ def testJava(projectFolder = "./") {
 			]])
 	}
 }
-def integrationTestJava(app_name, ocp_project, projectFolder = "./") {
+def integrationTestJava(app_name, ocp_project, projectFolder = ".") {
 	echo "In integrationTestJava: ${env.RELEASE_NUMBER}"
 	def nexusUrl = env.NEXUS_URL;
 
@@ -87,7 +87,7 @@ def integrationTestJava(app_name, ocp_project, projectFolder = "./") {
 	}
 }
 
-def analyzeJava(projectFolder = "./") {
+def analyzeJava(projectFolder = ".") {
 	def nexusUrl = env.NEXUS_URL;
 	stage('SonarQube Analysis') {
 		withSonarQubeEnv('sonar') { sh "mvn -s configuration/settings.xml -Dnexus.url=${nexusUrl} -f ${projectFolder} -Dbuild.number=${env.RELEASE_NUMBER}  sonar:sonar" }
@@ -104,7 +104,7 @@ def analyzeJava(projectFolder = "./") {
 	}
 }
 
-def deployJava(projectFolder = "./") {
+def deployJava(projectFolder = ".") {
 	echo "In deployJava: ${env.RELEASE_NUMBER}"
 	def nexus_url = env.NEXUS_URL;
 
@@ -118,7 +118,7 @@ def deployJava(projectFolder = "./") {
 		}
 	}
 }
-def dockerBuild(app_name, projectFolder = "./") {
+def dockerBuild(app_name, projectFolder = ".") {
 	def tag = "${env.RELEASE_NUMBER}"
 	stage('Container Build') {
 		echo "In DockerBuild: ${app_name}:${tag}"
@@ -128,14 +128,14 @@ def dockerBuild(app_name, projectFolder = "./") {
 		}
 	}
 }
-def podmanBuild(app_name, projectFolder = "./") {
+def podmanBuild(app_name, projectFolder = ".") {
 	def tag = "${env.RELEASE_NUMBER}"
 	stage('Container Build') {
 		echo "In DockerBuildOCP: ${app_name}:${tag}"
 		sh "podman build -t ${env.IMAGE_BASE}/${env.IMAGE_NAMESPACE}/${app_name}:${tag} ${projectFolder}"
 	}
 }
-def scanImage(app_name, projectFolder = "./") {
+def scanImage(app_name, projectFolder = ".") {
 	def tag = "${env.RELEASE_NUMBER}"
 	stage('Container Scan') {
 		writeFile file: 'anchore_images', text: "${env.IMAGE_BASE}/${env.IMAGE_NAMESPACE}/${app_name}:${tag} ${projectFolder}/Dockerfile"
