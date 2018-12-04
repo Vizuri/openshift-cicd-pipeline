@@ -54,9 +54,11 @@ def testJava(projectFolder = ".") {
 	stage ('Unit Test') {
 		sh "mvn -s configuration/settings.xml -Dnexus.url=${nexusUrl} -f ${projectFolder} -Dbuild.number=${env.RELEASE_NUMBER} test"
 		
-		sh "ls ${projectFolder}/target/surefire-reports/.*.xml"
+		sh "ls ${projectFolder}/target/surefire-reports/*.xml"
 		
 		junit "${projectFolder}/target/surefire-reports/*.xml"
+		
+		echo "After Junit"
 
 		step([$class: 'XUnitBuilder',
 			thresholds: [
