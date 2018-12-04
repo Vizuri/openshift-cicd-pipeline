@@ -148,6 +148,14 @@ def podmanPush(app_name) {
 	def tag = "${env.RELEASE_NUMBER}"
 	stage('Container Push') {
 		echo "In DockerPushOCP:"
+		sh "podman login -u ${REGISTRY_USERNAME} -p ${REGISTRY_PASSWORD} ${env.IMAGE_BASE}"
+		sh "podman push ${env.IMAGE_BASE}/${env.IMAGE_NAMESPACE}/${app_name}:${tag}"
+	}
+}
+def podmanPushCred(app_name) {
+	def tag = "${env.RELEASE_NUMBER}"
+	stage('Container Push') {
+		echo "In DockerPushOCP:"
 		withCredentials([
 			[$class: 'UsernamePasswordMultiBinding', credentialsId: 'quay-credentials',
 				usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']
@@ -158,7 +166,6 @@ def podmanPush(app_name) {
 		}
 	}
 }
-
 def dockerPush(img) {
 	stage('Container Push') {
 		docker.withRegistry(env.CONTAINER_REGISTRY, "docker-credentials") {
