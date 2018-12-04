@@ -214,7 +214,8 @@ def dockerBuildOpenshift(ocp_cluster, ocp_project, app_name) {
 def confirmDeploy(app_name, ocp_project) {
 	stage("Confirm Deploy to ${ocp_project}?") {
 		//notify(ocp_project, "Release ${env.RELEASE_NUMBER} of ${app_name} is ready for ${ocp_project}. Promote release here ${JOB_URL}")
-		input message: "Do you want to deploy ${app_name} release ${env.RELEASE_NUMBER} to ${ocp_project}?", submitter: "keudy"
+		//input message: "Do you want to deploy ${app_name} release ${env.RELEASE_NUMBER} to ${ocp_project}?", submitter: "keudy"
+		input message: "Do you want to deploy ${app_name} release ${env.RELEASE_NUMBER} to ${ocp_project}?"
 	}
 }
 
