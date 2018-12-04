@@ -12,13 +12,13 @@ def call(body) {
 	pipeline {
 		environment { 
 			RELEASE_NUMBER = ""; 			
-			OCP_APP_SUFFIX = pipelineParams.ocpAppSuffix;
-			IMAGE_BASE = pipelineParams.imageBase;
-			IMAGE_NAMESPACE = pipelineParams.imageNamespace;
-			REGISTRY_USERNAME = pipelineParams.registryUsername;
-			REGISTRY_PASSWORD = pipelineParams.registryPassword;			
-			CONTAINER_REGISTRY = "https://${pipelineParams.imageBase}"
-			NEXUS_URL = "http://nexus-${REGISTRY_USERNAME}-cicd.${ocpAppSuffix}"	
+			OCP_APP_SUFFIX = "";
+			IMAGE_BASE = "";
+			IMAGE_NAMESPACE = "";
+			REGISTRY_USERNAME = "";
+			REGISTRY_PASSWORD = "";			
+			CONTAINER_REGISTRY = ""
+			NEXUS_URL = ""	
 		}
 		node ("maven-podman") {
 			steps.checkout()

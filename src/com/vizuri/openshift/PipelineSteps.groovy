@@ -1,6 +1,16 @@
 package com.vizuri.openshift
 
 
+def setEnv(pipelineParams) {
+	env.OCP_APP_SUFFIX = pipelineParams.ocpAppSuffix;
+	env.IMAGE_BASE = pipelineParams.imageBase;
+	env.IMAGE_NAMESPACE = pipelineParams.imageNamespace;
+	env.REGISTRY_USERNAME = pipelineParams.registryUsername;
+	env.REGISTRY_PASSWORD = pipelineParams.registryPassword;
+	env.CONTAINER_REGISTRY = "https://${pipelineParams.imageBase}"
+	env.NEXUS_URL = "http://nexus-${REGISTRY_USERNAME}-cicd.${ocpAppSuffix}"
+}
+
 def checkout() {
 	echo "In checkout"
 	stage('Checkout') {
