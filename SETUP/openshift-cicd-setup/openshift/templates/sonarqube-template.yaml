@@ -1,0 +1,124 @@
+kind: Template
+apiVersion: v1
+labels:
+  version: 6.4.0
+  group: infrastructure
+metadata:
+  annotations:
+    description: Creates Sonarqube
+    tags: instant-app,sonarqube
+    version: 6.4.0
+  name: sonarqube
+parameters:
+- name: SONARQUBE_JDBC_USERNAME
+  description: Sonarqube JDBC Username
+  displayName: JDBC Username
+  value: sonar
+- name: SONARQUBE_JDBC_PASSWORD
+  description: Sonarqube JDBC Password
+  displayName: JDBC Password
+  value: sonar
+- name: SONARQUBE_JDBC_URL
+  description: Sonarqube JDBC Url
+  displayName: JDBC Url
+  value: jdbc:postgresql://sonardb/sonar 
+objects:
+- kind: Route
+  apiVersion: v1
+  metadata:
+    name: sonarqube
+  spec:
+    to:
+      kind: Service
+      name: sonarqube
+- kind: Service
+  apiVersion: v1
+  metadata:
+    name: sonarqube
+    annotations:
+      app: sonarqube
+      service.openshift.io/infrastructure: 'true'
+  spec:
+    ports:
+    - name: sonarqube
+      port: 9000
+      protocol: TCP
+      targetPort: 9000
+    selector:
+      app: sonarqube
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    labels:
+      app: sonarqube
+    name: sonarqube
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 1Gi
+- kind: DeploymentConfig
+  apiVersion: v1
+  metadata:
+    name: sonarqube
+    labels:
+      app: sonarqube
+  spec:
+    serviceName: sonarqube
+    replicas: 1
+    triggers:
+      - type: ConfigChange
+    test: false
+    strategy:
+      recreateParams:
+        timeoutSeconds: 600
+      resources: {}
+      type: Recreate
+    template:
+      metadata:
+        labels:
+          deploymentconfig: sonarqube
+          app: sonarqube
+      spec:
+        containers:
+        - name: sonarqube
+          image: openshiftdemos/sonarqube:7.0
+          imagePullPolicy: Always
+          env:
+            - name: SONARQUBE_JDBC_USERNAME
+              value: ${SONARQUBE_JDBC_USERNAME}
+            - name: SONARQUBE_JDBC_PASSWORD
+              value: ${SONARQUBE_JDBC_PASSWORD}
+            - name: SONARQUBE_JDBC_URL
+              value: ${SONARQUBE_JDBC_URL}
+          livenessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 130
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+            httpGet:
+              path: /
+              port: 9000
+          ports:
+          - containerPort: 9000
+            protocol: TCP
+          resources:
+          securityContext:
+            capabilities: {}
+            privileged: false
+          terminationMessagePath: /dev/termination-log
+          volumeMounts:
+          - mountPath: /opt/sonarqube/extensions
+            name: sonarqube
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: sonarqube
+          persistentVolumeClaim:
+            claimName: sonarqube

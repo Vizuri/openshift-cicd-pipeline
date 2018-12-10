@@ -1,0 +1,68 @@
+- name: Setup CI/CD Workshop Class
+  hosts: 127.0.0.1
+  connection: local
+
+  vars:
+    gogs_url: "http://gogs.apps.ocp-nonprod-01.kee.vizuri.com"
+    access_token: "7ff0a0928f6e0f201da34c68e7f1bfc609756786"
+    repo_name: "customer-service"
+    students_start: 1
+    students_end: 60 
+
+  tasks:
+  - name: Create LDAP User
+    ldap_entry:
+      bind_dn: cn=Directory Manager
+      bind_pw: P@ssw0rd
+      server_uri: ldap://directory.kee.vizuri.com
+      dn: "uid=student-{{ item }},ou=people,dc=vizuri,dc=com"
+      objectClass:
+        - inetOrgPerson
+      attributes:
+        cn: "student-{{ item }}"
+        sn: "student-{{ item }}"
+        uid: "student-{{ item }}"
+        userpassword: workshop1!
+        mail: "student-{{ item }}@vizuri.com"
+    with_items: "{{ lookup('sequence','start='+students_start|string + ' end='+students_end|string,wantlist=True) }}"
+
+    #with_sequence: count={{ students }}
+
+#  - name: Create Gogs User
+#    uri:
+#      url: "{{ gogs_url }}/api/v1/admin/users"
+#      method: POST
+#      body_format: json
+#      headers: 
+#        Content-Type: "application/json"
+#        Authorization: "token {{ access_token }}"
+#      status_code: 201
+#      timeout: 10
+#      body: "{\"source_id\": 1, \"login_name\": \"student-{{ item }}\", \"username\": \"student-{{ item }}\", \"email\": \"student-{{ item }}@vizuri.com\" }"
+#    with_items: "{{ lookup('sequence','start='+students_start|string + ' end='+students_end|string,wantlist=True) }}"
+#
+
+  - name: Create Customer Service Repo
+    uri:
+      url: "{{ gogs_url }}/api/v1/admin/users/student-{{ item }}/repos"
+      method: POST
+      body_format: json
+      headers: 
+        Content-Type: "application/json"
+        Authorization: "token {{ access_token }}"
+      status_code: 201
+      timeout: 10
+      body: "{\"Name\": \"{{ repo_name }}\", \"Description\": \"{{ repo_name }}\", \"private\": false }"
+    with_items: "{{ lookup('sequence','start='+students_start|string + ' end='+students_end|string,wantlist=True) }}"
+
+  - name: Populate Customer Service Repo
+    shell: |
+      git clone git@github.com:Vizuri/openshift-cicd-customer-service.git
+      cd openshift-cicd-customer-service
+      git remote add gogs http://student-{{ item }}:workshop1!@gogs.apps.ocp-nonprod-01.kee.vizuri.com/student-{{ item }}/customer-service.git
+      git checkout -b develop origin/develop
+      git push gogs develop
+      cd ..
+      rm -fr openshift-cicd-customer-service
+    with_items: "{{ lookup('sequence','start='+students_start|string + ' end='+students_end|string,wantlist=True) }}"
+

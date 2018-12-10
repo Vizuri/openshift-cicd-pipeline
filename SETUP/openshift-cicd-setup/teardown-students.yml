@@ -1,0 +1,21 @@
+- name: Setup CI/CD Workshop Class
+  hosts: config
+  become: true
+
+  vars:
+#    student_pwd: workshop1!
+#    students_start: 5
+#    students_end: 10
+    environments:
+      - { name: 'customer-dev', display_name: 'Customer Development', description: 'Customer Development' }
+      - { name: 'customer-test', display_name: 'Customer Test', description: 'Customer Test' }
+      - { name: 'customer-prod', display_name: 'Customer Prod', description: 'Customer Prod' }
+
+  tasks:
+  - name: delete Student Projects
+    shell: |
+      oc delete project student-{{ item[0]  }}-{{ item[1].name }}  
+    with_nested:
+      - "{{ lookup('sequence','start='+students_start|string + ' end='+students_end|string,wantlist=True) }}"
+      - "{{ environments }}"
+

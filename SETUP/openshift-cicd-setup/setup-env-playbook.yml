@@ -1,0 +1,50 @@
+- name: Setup CI/CD Workshop Class
+  hosts: 127.0.0.1
+  connection: local
+
+  vars:
+    openshift_host: "console.ocp-nonprod-01.kee.vizuri.com"
+    openshift_port: 8443
+    openshift_token: "LTZGp4VDlPGxW31HDmI5xRoH1nMCrvgrRRGOyV4sBRg"
+    student_id: "1"
+    environments:
+      - { name: 'customer-dev', display_name: 'Customer Development', description: 'Customer Development' }
+      - { name: 'customer-test', display_name: 'Customer Test', description: 'Customer Test' }
+      - { name: 'customer-prod', display_name: 'Customer Prod', description: 'Customer Prod' }
+
+  tasks:
+  - name: Create Student Projects
+    oc:
+      state: present
+      inline:
+        kind: ProjectRequest
+        metadata:
+          name: "student-{{ student_id }}-{{ item.name }}"
+        displayName: "{{ item.display_name }}"
+        description: "{{ item.description }}"
+      host: "{{ openshift_host }}"
+      port: "{{ openshift_port }}"
+      token: "{{ openshift_token }}"
+      validate_certs: false
+    with_items: "{{ environments }}"
+
+  - name: Create Quay Secret
+    shell: |
+      oc create secret docker-registry quay-registry -n student-{{ student_id }}-{{ item.name }} \
+          --docker-username=student-{{ student_id }} \
+          --docker-password=P@ssw0rd \
+          --docker-email=student-{{ student_id }}@vizuri.com \
+          --docker-server=registry.kee.vizuri.com
+    with_items: "{{ environments }}"
+
+  - name: Link Secret to Default Service Account
+    shell: | 
+      oc project "student-{{ student_id }}-{{ item.name }}"
+      oc secrets link default quay-registry --for=pull
+    with_items: "{{ environments }}"
+
+  - name: Create Student Database
+    shell: |
+      oc new-app --template=mongodb-persistent --param=DATABASE_SERVICE_NAME=customerdb --param=MONGODB_USER=customer --param=MONGODB_PASSWORD=customer --param=MONGODB_DATABASE=customer -n student-{{ student_id }}-{{ item.name }}
+    with_items: "{{ environments }}"
+

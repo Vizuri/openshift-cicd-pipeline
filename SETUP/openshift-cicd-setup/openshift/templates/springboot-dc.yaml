@@ -1,0 +1,121 @@
+apiVersion: v1
+kind: Template
+metadata:
+  name: springboot-dc
+parameters:
+- name: APP_NAME
+  description: The name assigned to all of the application objects defined in this template.
+  displayName: Application Name
+  required: true
+- description: The exposed hostname that will route to the service, if left blank a value will be defaulted
+  displayName: Application Hostname
+  name: APPLICATION_DOMAIN
+- description: The container image name to deploy
+  displayName: Image Name
+  name: IMAGE_NAME
+- description: The exposed hostname that will route to the service, if left blank a value will be defaulted
+  displayName: Java Optsions
+  name: JAVA_OPTS
+  value: "-Xms128m -Xmx256m"
+- description: POD Memory Limit
+  name: MEMORY_LIMIT
+  value: 312Mi
+- description: POD CPU Limit
+  name: CPU_LIMIT
+  value: 750m
+- description: POD Memory Request
+  name: MEMORY_REQUEST
+  value: 256Mi
+- description: POD CPU Request
+  name: CPU_REQUEST
+  value: 100m
+objects:
+- apiVersion: v1
+  kind: Route
+  metadata:
+    labels:
+      app: ${APP_NAME}
+      name: ${APP_NAME}
+    name: ${APP_NAME}
+  spec:
+    host: ${APPLICATION_DOMAIN}
+    port:
+      targetPort: web
+    to:
+      kind: Service
+      name: ${APP_NAME}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: null
+    name: ${APP_NAME}
+  spec:
+    portalIP: ""
+    ports:
+    - name: web
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      name: ${APP_NAME}
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: "v1"
+  kind: "DeploymentConfig"
+  metadata:
+    name: "${APP_NAME}"
+  spec:
+    replicas: 1
+    strategy:
+      type: "Recreate"
+    template:
+      metadata:
+        labels:
+          name: "${APP_NAME}"
+          deploymentconfig: "${APP_NAME}"
+      spec:
+        containers:
+        - args:
+          env:
+          - name: MONGO_DATABASE_ADMIN_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: fhirdb
+                key: database-admin-password
+          - name: MONGO_DATABASE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: fhirdb
+                key: database-password
+          - name: MONGO_DATABASE_USER
+            valueFrom:
+              secretKeyRef:
+               name: fhirdb
+               key: database-user
+          - name: MONGO_DATABASE_HOST
+            value: fhirdb
+          - name: MONGO_DATABASE_PORT
+            value: '27017'
+          - name: JAVA_OPTS
+            value: '${JAVA_OPTS}'
+          image: ${IMAGE_NAME}
+          imagePullPolicy: "Always"
+          name: "${APP_NAME}"
+          readinessProbe:
+          livenessProbe:
+          ports:
+          - name: web
+            containerPort: 8080
+            protocol: TCP
+          - name: jolokia
+            containerPort: 8778
+            protocol: TCP
+          resources:
+            limits:
+            requests:
+              cpu: ${CPU_REQUEST}
+              memory: ${MEMORY_REQUEST}
+          securityContext:
+          terminationMessagePath: "/dev/termination-log"
+          volumeMounts:
+    triggers:

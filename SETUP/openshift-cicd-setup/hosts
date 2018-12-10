@@ -1,0 +1,41 @@
+[all:vars]
+students_start=1
+students_end=60
+
+
+ansible_connection=ssh
+ansible_ssh_user=ec2-user
+ansible_ssh_private_key_file=/root/.ssh/kenteudy-aws
+#ansible_ssh_private_key_file=/Users/keudy/.ssh/kenteudy-aws
+ansible_become=true
+
+
+[config]
+172.31.83.191 openshift_node_group_name='node-config-master-infra'
+
+[masters]
+172.31.83.191 openshift_node_group_name='node-config-master-infra'
+172.31.84.254 openshift_node_group_name='node-config-master-infra'
+
+[etcd]
+172.31.89.71 openshift_node_group_name='node-config-master'
+172.31.80.27 openshift_node_group_name='node-config-master'
+172.31.95.204 openshift_node_group_name='node-config-master'
+
+[nodes]
+172.31.83.191 openshift_node_group_name='node-config-master-infra'
+172.31.84.254 openshift_node_group_name='node-config-master-infra'
+172.31.89.71 openshift_node_group_name='node-config-master'
+172.31.80.27 openshift_node_group_name='node-config-master'
+172.31.95.204 openshift_node_group_name='node-config-master'
+
+172.31.94.248 openshift_node_group_name="node-config-compute"
+172.31.93.230 openshift_node_group_name="node-config-compute"
+172.31.88.151 openshift_node_group_name="node-config-compute"
+172.31.90.196 openshift_node_group_name="node-config-compute"
+172.31.81.53 openshift_node_group_name="node-config-compute"
+172.31.92.43 openshift_node_group_name="node-config-compute"
+172.31.88.157 openshift_node_group_name="node-config-compute"
+172.31.92.44 openshift_node_group_name="node-config-compute"
+172.31.80.170 openshift_node_group_name="node-config-compute"
+172.31.89.221 openshift_node_group_name="node-config-compute"

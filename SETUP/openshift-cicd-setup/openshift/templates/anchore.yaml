@@ -1,0 +1,369 @@
+apiVersion: v1
+kind: Template
+metadata:
+  creationTimestamp: null
+  name: anchore
+
+parameters:
+
+objects:
+
+- apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: null
+    name: anchore-config
+  data:
+    config.yaml: |
+      #default_admin_password: ${ANCHORE_ADMIN_PASSWORD}
+      #default_admin_email: ${ANCHORE_ADMIN_EMAIL}
+      credentials:
+        database:
+          db_connect: 'postgresql+pg8000://anchore:anchore@anchoredb:5432/anchore'
+          db_connect_args:
+            timeout: 120
+            ssl: False
+          db_pool_size: 30
+          db_pool_max_overflow: 100
+      services:
+        apiext:
+          enabled: True
+          require_auth: True
+          endpoint_hostname: '${ANCHORE_ENDPOINT_HOSTNAME}'
+          listen: '0.0.0.0'
+          port: 8228
+          authorization_handler: native
+        kubernetes_webhook:
+          enabled: True
+          require_auth: False
+          endpoint_hostname: '${ANCHORE_ENDPOINT_HOSTNAME}'
+          listen: '0.0.0.0'
+          port: 8338
+        catalog:
+          enabled: True
+          require_auth: True
+          endpoint_hostname: '${ANCHORE_ENDPOINT_HOSTNAME}'
+          listen: '0.0.0.0'
+          port: 8082
+          archive:
+            compression:
+              enabled: False
+              min_size_kbytes: 100
+            storage_driver:
+              name: db
+              config: {}
+          cycle_timer_seconds: '1'
+          cycle_timers:
+            image_watcher: 3600
+            policy_eval: 3600
+            vulnerability_scan: 14400
+            analyzer_queue: 1
+            notifications: 30
+            service_watcher: 15
+            policy_bundle_sync: 300
+            repo_watcher: 60
+        simplequeue:
+          enabled: True
+          require_auth: True
+          endpoint_hostname: '${ANCHORE_ENDPOINT_HOSTNAME}'
+          listen: '0.0.0.0'
+          port: 8083
+        analyzer:
+          enabled: True
+          require_auth: True
+          cycle_timer_seconds: 1
+          max_threads: 1
+          analyzer_driver: 'nodocker'
+          endpoint_hostname: '${ANCHORE_ENDPOINT_HOSTNAME}'
+          listen: '0.0.0.0'
+          port: 8084
+        policy_engine:
+          enabled: True
+          require_auth: True
+          endpoint_hostname: '${ANCHORE_ENDPOINT_HOSTNAME}'
+          listen: '0.0.0.0'
+          port: 8087
+          cycle_timer_seconds: 1
+          cycle_timers:
+            feed_sync: 21600 # 6 hours between feed syncs
+            feed_sync_checker: 3600 # 1 hour between checks to see if there needs to be a task queued
+
+- apiVersion: v1
+  kind: DeploymentConfig
+  metadata:
+    creationTimestamp: null
+    generation: 1
+    labels:
+      app: anchore
+    name: anchore
+  spec:
+    replicas: 1
+    selector:
+      app: anchore
+    strategy:
+      resources: {}
+      rollingParams:
+        intervalSeconds: 1
+        maxSurge: 25%
+        maxUnavailable: 25%
+        timeoutSeconds: 600
+        updatePeriodSeconds: 1
+      type: Rolling
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: anchore
+      spec:
+        containers:
+        - env:
+          - name: ANCHORE_ENDPOINT_HOSTNAME
+            value: anchore
+          - name: ANCHORE_HOST_ID
+            value: dockerhostid-anchore-engine
+          image: docker.io/anchore/anchore-engine:latest
+          name: anchore-engine
+          ports:
+          - containerPort: 8228
+          - containerPort: 8338
+          - containerPort: 8082
+          - containerPort: 8083
+          - containerPort: 8084
+          - containerPort: 8087
+          resources: {}
+          volumeMounts:
+          - mountPath: /config
+            name: anchore-engine-claim
+          - mountPath: /anchore-config
+            name: anchore-config
+        initContainers:
+        - env:
+          image: docker.io/anchore/anchore-engine:latest
+          command: ['sh', '-c', 'cp /anchore-config/config.yaml /config/config.yaml']
+          name: anchore-engine-init
+          ports:
+          resources: {}
+          volumeMounts:
+          - mountPath: /config
+            name: anchore-engine-claim
+          - mountPath: /var/log
+            name: anchore-engine-logs
+          - mountPath: /anchore-config
+            name: anchore-config
+        restartPolicy: Always
+        serviceAccountName: anchore
+        volumes:
+        - name: anchore-engine-claim
+          persistentVolumeClaim:
+            claimName: anchore-engine-claim
+        - name: anchore-engine-logs
+          persistentVolumeClaim:
+            claimName: anchore-engine-logs
+        - configMap:
+            defaultMode: 420
+            name: anchore-config
+          name: anchore-config
+    test: false
+    triggers:
+    - type: ConfigChange
+
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    labels:
+      io.kompose.service: anchore-engine-claim
+    name: anchore-engine-claim
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 100Gi
+
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    labels:
+      io.kompose.service: anchore-engine-logs
+    name: anchore-engine-logs
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 5Gi
+
+- apiVersion: v1
+  kind: Route
+  metadata:
+    labels:
+      app: anchore
+      name: anchore
+    name: anchore
+  spec:
+    port:
+      targetPort: anchore-port0
+    to:
+      kind: Service
+      name: anchore
+      
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: null
+    labels:
+      app: anchore
+    name: anchore
+  spec:
+    ports:
+    - name: anchore-port0
+      port: 8228
+      protocol: TCP
+      targetPort: 8228
+    - name: anchore-port1
+      port: 8338
+      protocol: TCP
+      targetPort: 8338
+    - name: anchore-port2
+      port: 8082
+      protocol: TCP
+      targetPort: 8082
+    - name: anchore-port3
+      port: 8083
+      protocol: TCP
+      targetPort: 8083
+    - name: anchore-port4
+      port: 8084
+      protocol: TCP
+      targetPort: 8084
+    - name: anchore-port5
+      port: 8087
+      protocol: TCP
+      targetPort: 8087
+    selector:
+      app: anchore
+    sessionAffinity: None
+
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    labels:
+      app: anchore
+    name: anchoredb
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 5Gi
+
+- apiVersion: v1
+  kind: DeploymentConfig
+  metadata:
+    annotations:
+      iconClass: icon-postgresql
+      tags: database,postgresql
+    creationTimestamp: null
+    generation: 1
+    labels:
+      app: anchore
+      template: postgres
+    name: anchoredb
+  spec:
+    replicas: 1
+    selector:
+      name: anchoredb
+    strategy:
+      recreateParams:
+        timeoutSeconds: 600
+      resources: {}
+      type: Recreate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          name: anchoredb
+      spec:
+        containers:
+        - env:
+          - name: POSTGRESQL_USER
+            value: anchore
+          - name: POSTGRESQL_PASSWORD
+            value: anchore
+          - name: POSTGRESQL_DATABASE
+            value: anchore
+          image: postgresql
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            tcpSocket:
+              port: 5432
+            timeoutSeconds: 1
+          name: anchoredb
+          ports:
+          - containerPort: 5432
+            protocol: TCP
+          readinessProbe:
+            exec:
+              command:
+              - /bin/sh
+              - -i
+              - -c
+              - psql -h 127.0.0.1 -U postgres -q -d anchore -c 'SELECT 1'
+            failureThreshold: 3
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+            requests:
+          securityContext:
+            capabilities: {}
+            privileged: false
+          terminationMessagePath: /dev/termination-log
+          volumeMounts:
+          - mountPath: /var/lib/pgsql/data
+            name: postgres-data
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: postgres-data
+          persistentVolumeClaim:
+            claimName: anchoredb
+    test: false
+    triggers:
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+        - anchoredb
+        from:
+          kind: ImageStreamTag
+          name: postgresql:9.6
+          namespace: openshift
+      type: ImageChange
+    - type: ConfigChange
+
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: null
+    labels:
+      app: anchore
+      template: postgres
+    name: anchoredb
+  spec:
+    ports:
+    - name: postgresql
+      port: 5432
+      protocol: TCP
+      targetPort: 5432
+    selector:
+      name: anchoredb
+    sessionAffinity: None
+    type: ClusterIP

@@ -1,0 +1,52 @@
+- name: Setup CI/CD Workshop Class
+  hosts: config
+  become: true
+
+  vars:
+    student_pwd: workshop1!
+    environments:
+      - { name: 'customer-dev', display_name: 'Customer Development', description: 'Customer Development' }
+      - { name: 'customer-test', display_name: 'Customer Test', description: 'Customer Test' }
+      - { name: 'customer-prod', display_name: 'Customer Prod', description: 'Customer Prod' }
+
+  tasks:
+  - name: Create Student Projects
+    shell: |
+      oc new-project student-{{ item[0]  }}-{{ item[1].name }}  --description="{{ item[1].display_name }}" --display-name="{{ item[1].description }}"
+    with_nested:
+      - "{{ lookup('sequence','start='+students_start|string + ' end='+students_end|string,wantlist=True) }}"
+      - "{{ environments }}"
+
+  - name: Set Student Project Permissions
+    shell: |
+      oc policy add-role-to-user admin student-{{ item[0] }} -n student-{{ item[0] }}-{{ item[1].name }} 
+    with_nested:
+      - "{{ lookup('sequence','start='+students_start|string + ' end='+students_end|string,wantlist=True) }}"
+      - "{{ environments }}"
+
+  - name: Create Quay Secret
+    shell: |
+      oc create secret docker-registry quay-registry -n student-{{ item[0] }}-{{ item[1].name }} \
+          --docker-username=student-{{ item[0] }} \
+          --docker-password={{ student_pwd }} \
+          --docker-email=student-{{ item[0] }}@vizuri.com \
+          --docker-server=registry.kee.vizuri.com
+    with_nested:
+      - "{{ lookup('sequence','start='+students_start|string + ' end='+students_end|string,wantlist=True) }}"
+      - "{{ environments }}"
+
+  - name: Link Secret to Default Service Account
+    shell: | 
+      oc project "student-{{ item[0] }}-{{ item[1].name }}"
+      oc secrets link default quay-registry --for=pull
+    with_nested:
+      - "{{ lookup('sequence','start='+students_start|string + ' end='+students_end|string,wantlist=True) }}"
+      - "{{ environments }}"
+
+  - name: Create Student Database
+    shell: |
+      oc new-app --template=mongodb-ephemeral --param=DATABASE_SERVICE_NAME=customerdb --param=MONGODB_USER=customer --param=MONGODB_PASSWORD=customer --param=MONGODB_DATABASE=customer -n student-{{ item[0] }}-{{ item[1].name }}
+    with_nested:
+      - "{{ lookup('sequence','start='+students_start|string + ' end='+students_end|string,wantlist=True) }}"
+      - "{{ environments }}"
+

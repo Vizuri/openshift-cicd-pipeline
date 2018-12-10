@@ -1,0 +1,11 @@
+---
+- name: Setup CI/CD Workshop Class
+  hosts: config
+  become: true
+
+  tasks:
+  - name: Delete CICD Projects
+    shell: |
+      oc delete project student-{{ item }}-cicd 
+    with_items: "{{ lookup('sequence','start='+students_start|string + ' end='+students_end|string,wantlist=True) }}"
+

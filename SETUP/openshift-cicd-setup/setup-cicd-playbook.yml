@@ -1,0 +1,94 @@
+---
+- name: Setup CI/CD Workshop Class
+  hosts: config
+  become: true
+
+  vars:
+    environments:
+      - { name: 'customer-dev', display_name: 'Customer Development', description: 'Customer Development' }
+      - { name: 'customer-test', display_name: 'Customer Test', description: 'Customer Test' }
+      - { name: 'customer-prod', display_name: 'Customer Prod', description: 'Customer Prod' }
+
+  tasks:
+  - name: Create CICD Projects
+    shell: |
+      oc new-project student-{{ item }}-cicd --description="CICD Project" --display-name="CICD"
+    with_items: "{{ lookup('sequence','start='+students_start|string + ' end='+students_end|string,wantlist=True) }}"
+
+  - name: Set CICD Project Permissions
+    shell: |
+      oc policy add-role-to-user admin student-{{ item}} -n student-{{ item }}-cicd
+    with_items: "{{ lookup('sequence','start='+students_start|string + ' end='+students_end|string,wantlist=True) }}"
+
+  - name: Copy OpenShift Templates
+    copy:
+      src: openshift/templates
+      dest: /tmp/openshift
+
+  - name: Add Jenkins Service Account to Privileged Security Context
+    shell: |
+      oc adm policy add-scc-to-user privileged "system:serviceaccount:student-{{ item }}-cicd:jenkins"
+    with_items: "{{ lookup('sequence','start='+students_start|string + ' end='+students_end|string,wantlist=True) }}"
+
+  - name: Setup for Anchore Deploy
+    shell: |
+      oc project "student-{{ item }}-cicd"
+      oc create serviceaccount anchore
+      oc adm policy add-scc-to-user anyuid system:serviceaccount:student-{{ item }}-cicd:anchore
+    with_items: "{{ lookup('sequence','start='+students_start|string + ' end='+students_end|string,wantlist=True) }}"
+
+  - name: Copy Registry Certificates
+    copy:
+      src: quay-config.json
+      dest: /tmp
+
+  - name: Create Quay Secret
+    shell: |
+      oc create secret generic quay-registry -n student-{{ item }}-cicd \
+        --from-file=.dockerconfigjson=/tmp/quay-config.json \
+        --type=kubernetes.io/dockerconfigjson
+    with_items: "{{ lookup('sequence','start='+students_start|string + ' end='+students_end|string,wantlist=True) }}"
+
+  - name: Deploy CICD Tools
+    shell: |
+      oc project "student-{{ item }}-cicd"
+      oc new-app -f /tmp/openshift/templates/jenkins-ephemeral.yaml --name=jenkins -p MEMORY_LIMIT=1Gi
+      oc new-app -f /tmp/openshift/templates/nexus3-template.yaml  --param=NEXUS_VERSION=3.12.1 --param=MAX_MEMORY=20Gi
+      oc new-app --template postgresql-ephemeral --name=sonardb -p DATABASE_SERVICE_NAME=sonardb -p POSTGRESQL_USER=sonar -p POSTGRESQL_PASSWORD=sonar -p POSTGRESQL_DATABASE=sonar
+      oc new-app -f /tmp/openshift/templates/sonarqube-template.yaml -p SONARQUBE_JDBC_USERNAME=sonar -p SONARQUBE_JDBC_PASSWORD=sonar -p SONARQUBE_JDBC_URL=jdbc:postgresql://sonardb/sonar
+    with_items: "{{ lookup('sequence','start='+students_start|string + ' end='+students_end|string,wantlist=True) }}"
+
+  - name: Set Jenkins SA Permissions
+    shell: |
+      oc policy add-role-to-user admin system:serviceaccount:student-{{ item[0] }}-cicd:jenkins -n student-{{ item[0] }}-{{ item[1].name }}
+    with_nested:
+      - "{{ lookup('sequence','start='+students_start|string + ' end='+students_end|string,wantlist=True) }}"
+      - "{{ environments }}"
+
+
+  - name: Link Secret to Default Service Account
+    shell: |
+      oc project "student-{{ item }}-cicd"
+      oc secrets link default quay-registry --for=pull
+      oc secrets link jenkins quay-registry --for=pull
+    with_items: "{{ lookup('sequence','start='+students_start|string + ' end='+students_end|string,wantlist=True) }}"
+
+  - name: Deploy Anchore
+    shell: |
+      oc project "student-{{ item }}-cicd"
+      oc new-app /tmp/openshift/templates/anchore.yaml
+    with_items: "{{ lookup('sequence','start='+students_start|string + ' end='+students_end|string,wantlist=True) }}"
+
+- name: Copy Certificates
+  hosts: all
+
+  tasks: 
+  - name: Copy Registry Certificates
+    copy:
+      src: quay.kee.vizuri.com
+      dest: /etc/docker/certs.d
+
+  - name: Copy Registry Certificates
+    copy:
+      src: registry.kee.vizuri.com
+      dest: /etc/docker/certs.d
