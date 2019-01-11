@@ -92,7 +92,7 @@ def integrationTestJava(app_name, ocp_project, projectFolder = ".") {
 def analyzeJava(projectFolder = ".") {
 	def nexusUrl = env.NEXUS_URL;
 	stage('SonarQube Analysis') {
-		withSonarQubeEnv('sonar') { sh "mvn -s configuration/settings.xml -Dnexus.url=${nexusUrl} -f ${projectFolder}.pom.xml -Dbuild.number=${env.RELEASE_NUMBER}  sonar:sonar" }
+		withSonarQubeEnv('sonar') { sh "mvn -s configuration/settings.xml -Dnexus.url=${nexusUrl} -f ${projectFolder}/pom.xml -Dbuild.number=${env.RELEASE_NUMBER}  sonar:sonar" }
 	}
 
 
