@@ -44,7 +44,7 @@ def buildJava(projectFolder = ".") {
 
 	stage('Build') {
 		echo "In Build"
-		sh "mvn -s configuration/settings.xml -Dnexus.url=${nexusUrl} -f ${projectFolder} -DskipTests=true -Dbuild.number=${env.RELEASE_NUMBER} clean install"
+		sh "mvn -s configuration/settings.xml -Dnexus.url=${nexusUrl} -f ${projectFolder}/pom.xml -DskipTests=true -Dbuild.number=${env.RELEASE_NUMBER} clean install"
 	}
 }
 def testJava(projectFolder = ".") {
@@ -52,7 +52,7 @@ def testJava(projectFolder = ".") {
 
 	echo "In testJava: ${env.RELEASE_NUMBER}"
 	stage ('Unit Test') {
-		sh "mvn -s configuration/settings.xml -Dnexus.url=${nexusUrl} -f ${projectFolder} -Dbuild.number=${env.RELEASE_NUMBER} test"
+		sh "mvn -s configuration/settings.xml -Dnexus.url=${nexusUrl} -f ${projectFolder}/pom.xml -Dbuild.number=${env.RELEASE_NUMBER} test"
 		
 		sh "ls ${projectFolder}/target/surefire-reports/*.xml"
 		
@@ -76,7 +76,7 @@ def integrationTestJava(app_name, ocp_project, projectFolder = ".") {
 	def ocpAppSuffix = env.OCP_APP_SUFFIX;
 	def testEndpoint = "http://${app_name}-${ocp_project}.${ocpAppSuffix}"
 	stage ('Integration Test') {
-		sh "mvn -s configuration/settings.xml -Dnexus.url=${nexusUrl} -f ${projectFolder} -P integration-tests -Dbuild.number=${env.RELEASE_NUMBER} -DbaseUrl=${testEndpoint} integration-test"
+		sh "mvn -s configuration/settings.xml -Dnexus.url=${nexusUrl} -f ${projectFolder}/pom.xml -P integration-tests -Dbuild.number=${env.RELEASE_NUMBER} -DbaseUrl=${testEndpoint} integration-test"
 		junit "target/surefire-reports/*.xml"
 
 		step([$class: 'XUnitBuilder',
@@ -92,7 +92,7 @@ def integrationTestJava(app_name, ocp_project, projectFolder = ".") {
 def analyzeJava(projectFolder = ".") {
 	def nexusUrl = env.NEXUS_URL;
 	stage('SonarQube Analysis') {
-		withSonarQubeEnv('sonar') { sh "mvn -s configuration/settings.xml -Dnexus.url=${nexusUrl} -f ${projectFolder} -Dbuild.number=${env.RELEASE_NUMBER}  sonar:sonar" }
+		withSonarQubeEnv('sonar') { sh "mvn -s configuration/settings.xml -Dnexus.url=${nexusUrl} -f ${projectFolder}.pom.xml -Dbuild.number=${env.RELEASE_NUMBER}  sonar:sonar" }
 	}
 
 
@@ -113,10 +113,10 @@ def deployJava(projectFolder = ".") {
 	stage('Deploy Build Artifact') {
 		echo "In Deploy"
 		if(nexus_url != null) {
-			sh "mvn -s configuration/settings.xml -f ${projectFolder} -DskipTests=true -Dbuild.number=${env.RELEASE_NUMBER} -Dnexus.url=${nexus_url} deploy"
+			sh "mvn -s configuration/settings.xml -f ${projectFolder}/pom.xml -DskipTests=true -Dbuild.number=${env.RELEASE_NUMBER} -Dnexus.url=${nexus_url} deploy"
 		}
 		else {
-			sh "mvn -s configuration/settings.xml -f ${projectFolder} -DskipTests=true -Dbuild.number=${env.RELEASE_NUMBER} deploy"
+			sh "mvn -s configuration/settings.xml -f ${projectFolder}/pom.xml -DskipTests=true -Dbuild.number=${env.RELEASE_NUMBER} deploy"
 		}
 	}
 }
