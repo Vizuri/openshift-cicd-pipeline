@@ -48,18 +48,6 @@ objects:
       app: sonarqube
     sessionAffinity: None
     type: ClusterIP
-- apiVersion: v1
-  kind: PersistentVolumeClaim
-  metadata:
-    labels:
-      app: sonarqube
-    name: sonarqube
-  spec:
-    accessModes:
-    - ReadWriteOnce
-    resources:
-      requests:
-        storage: 1Gi
 - kind: DeploymentConfig
   apiVersion: v1
   metadata:
@@ -120,5 +108,4 @@ objects:
         terminationGracePeriodSeconds: 30
         volumes:
         - name: sonarqube
-          persistentVolumeClaim:
-            claimName: sonarqube
+          emptyDir:

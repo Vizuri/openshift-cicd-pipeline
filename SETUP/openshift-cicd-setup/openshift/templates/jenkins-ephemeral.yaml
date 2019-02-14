@@ -32,9 +32,6 @@ objects:
       template.openshift.io/expose-uri: http://{.spec.host}{.spec.path}
     name: ${JENKINS_SERVICE_NAME}
   spec:
-    tls:
-      insecureEdgeTerminationPolicy: Redirect
-      termination: edge
     to:
       kind: Service
       name: ${JENKINS_SERVICE_NAME}
@@ -72,7 +69,7 @@ objects:
             value: ${JENKINS_SERVICE_NAME}
           - name: JNLP_SERVICE_NAME
             value: ${JNLP_SERVICE_NAME}
-          image: ' '
+          image: docker.io/openshift/jenkins-2-centos7:v4.0
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 2
@@ -107,16 +104,6 @@ objects:
             medium: ""
           name: ${JENKINS_SERVICE_NAME}-data
     triggers:
-    - imageChangeParams:
-        automatic: true
-        containerNames:
-        - jenkins
-        from:
-          kind: ImageStreamTag
-          name: ${JENKINS_IMAGE_STREAM_TAG}
-          namespace: ${NAMESPACE}
-        lastTriggeredImage: ""
-      type: ImageChange
     - type: ConfigChange
 - apiVersion: v1
   kind: ServiceAccount

@@ -30,7 +30,7 @@
           --docker-username=student-{{ item[0] }} \
           --docker-password={{ student_pwd }} \
           --docker-email=student-{{ item[0] }}@vizuri.com \
-          --docker-server=registry.kee.vizuri.com
+          --docker-server=quay.{{ app_domain }}
     with_nested:
       - "{{ lookup('sequence','start='+students_start|string + ' end='+students_end|string,wantlist=True) }}"
       - "{{ environments }}"
@@ -39,6 +39,13 @@
     shell: | 
       oc project "student-{{ item[0] }}-{{ item[1].name }}"
       oc secrets link default quay-registry --for=pull
+    with_nested:
+      - "{{ lookup('sequence','start='+students_start|string + ' end='+students_end|string,wantlist=True) }}"
+      - "{{ environments }}"
+
+  - name: Set Jenkins SA Permissions
+    shell: |
+      oc policy add-role-to-user admin system:serviceaccount:student-{{ item[0] }}-cicd:jenkins -n student-{{ item[0] }}-{{ item[1].name }}
     with_nested:
       - "{{ lookup('sequence','start='+students_start|string + ' end='+students_end|string,wantlist=True) }}"
       - "{{ environments }}"

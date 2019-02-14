@@ -1,0 +1,18 @@
+---
+- name: Setup GOGS
+  hosts: config
+  become: true
+
+  tasks:
+  - name: Copy OpenShift Templates
+    copy:
+      src: openshift/templates
+      dest: /tmp/openshift
+
+  - name: Deploy Gogs
+    shell: |
+      oc new-project gogs --description="GOGS" --display-name="GOGS"
+      #oc create secret generic my-secret --from-file=/tmp/openshift/files/gogs/ldap_auth.conf
+      oc new-app -f /tmp/openshift/templates/gogs-persistent-template.yaml --param=HOSTNAME=gogs.{{ app_domain }} --param=GOGS_VOLUME_CAPACITY=10Gi
+
+

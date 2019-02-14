@@ -1,0 +1,72 @@
+ansible-playbook -i hosts deploy-quay.yml
+
+look into change db user to admin user account
+rsh into postgresql pod:
+
+
+psql -U quay -d quay -c "CREATE EXTENSION pg_trgm"
+psql
+  \c quay
+  CREATE EXTENSION pg_trgm;
+exit;
+
+http://quay-enterprise-quay-enterprise.apps.ocpdemo.kee.vizuri.com
+
+When prompted enter quay database info:
+
+server: quaydb
+username: quay
+password: quay
+database: quay
+
+Save:
+
+Once container restarts enter admin user credentials:
+admin
+P@ssw0rd
+
+
+Configure Redis
+-------------
+Enter host name:
+
+quay-enterprise-redis
+
+Save
+
+Configure SSL
+------------
+Admin Choose to configure SSL
+Set path to 
+quay.apps.ocpdemo.kee.vizuri.com
+
+upload certificates generated for quay.apps.ocpdemo.kee.vizuri.com
+
+ssl.cert
+ssl.key
+
+Save and Restart
+
+Configure Storage:
+----------------
+Buckent Name: kee-quay
+AWS Credentials
+AWS Key
+
+Save
+
+Configure Auth
+-------------
+Choose LDAP
+
+URL: ldap://directory.kee.vizuri.com
+Base: dc=vizuri,dc=com
+People Pase: ou=People
+
+User: cn=Directory Manager
+Password: P@ssw0rd
+
+
+QUAY Setup
+=======
+

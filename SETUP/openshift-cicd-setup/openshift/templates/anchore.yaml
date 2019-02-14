@@ -153,12 +153,13 @@ objects:
         restartPolicy: Always
         serviceAccountName: anchore
         volumes:
+        - emptyDir:
+          name: ${JENKINS_SERVICE_NAME}-data
+        volumes:
         - name: anchore-engine-claim
-          persistentVolumeClaim:
-            claimName: anchore-engine-claim
+          emptyDir:
         - name: anchore-engine-logs
-          persistentVolumeClaim:
-            claimName: anchore-engine-logs
+          emptyDir:
         - configMap:
             defaultMode: 420
             name: anchore-config
@@ -166,32 +167,6 @@ objects:
     test: false
     triggers:
     - type: ConfigChange
-
-- apiVersion: v1
-  kind: PersistentVolumeClaim
-  metadata:
-    labels:
-      io.kompose.service: anchore-engine-claim
-    name: anchore-engine-claim
-  spec:
-    accessModes:
-    - ReadWriteOnce
-    resources:
-      requests:
-        storage: 100Gi
-
-- apiVersion: v1
-  kind: PersistentVolumeClaim
-  metadata:
-    labels:
-      io.kompose.service: anchore-engine-logs
-    name: anchore-engine-logs
-  spec:
-    accessModes:
-    - ReadWriteOnce
-    resources:
-      requests:
-        storage: 5Gi
 
 - apiVersion: v1
   kind: Route
@@ -243,19 +218,6 @@ objects:
     selector:
       app: anchore
     sessionAffinity: None
-
-- apiVersion: v1
-  kind: PersistentVolumeClaim
-  metadata:
-    labels:
-      app: anchore
-    name: anchoredb
-  spec:
-    accessModes:
-    - ReadWriteOnce
-    resources:
-      requests:
-        storage: 5Gi
 
 - apiVersion: v1
   kind: DeploymentConfig
@@ -334,8 +296,7 @@ objects:
         terminationGracePeriodSeconds: 30
         volumes:
         - name: postgres-data
-          persistentVolumeClaim:
-            claimName: anchoredb
+          emptyDir:
     test: false
     triggers:
     - imageChangeParams:

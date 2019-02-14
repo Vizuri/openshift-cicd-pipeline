@@ -3,9 +3,6 @@
   become: true
 
   vars:
-#    student_pwd: workshop1!
-#    students_start: 5
-#    students_end: 10
     environments:
       - { name: 'customer-dev', display_name: 'Customer Development', description: 'Customer Development' }
       - { name: 'customer-test', display_name: 'Customer Test', description: 'Customer Test' }

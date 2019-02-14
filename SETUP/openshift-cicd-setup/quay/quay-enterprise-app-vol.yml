@@ -1,0 +1,12 @@
+- kind: PersistentVolumeClaim
+  apiVersion: v1
+  metadata:
+    name: quay-config-data
+    labels:
+      app: quay-enterprise
+  spec:
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 1GB
