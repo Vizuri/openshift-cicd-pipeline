@@ -35,6 +35,7 @@ Add the following steps to the Jenkinsfile.
 If you log into the Quay registry, you will see your image.
 
 https://quay.{{ ocp_app_suffix }}
+
 * Username: student-{{ student_number }}
 * Password: {{ student_pwd }}
 

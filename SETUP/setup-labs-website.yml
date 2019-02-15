@@ -1,0 +1,42 @@
+- name: Setup CI/CD Workshop Class
+  hosts: 127.0.0.1
+  connection: local
+#  hosts: config
+#  become: true
+
+  vars:
+    students_start: 50 
+    students_end: 55 
+    working_dir: working
+    html_dir: html
+    workshop_dns_zone: kee.vizuri.com
+    ocp_app_suffix: apps.ocpws.kee.vizuri.com
+    ocp_console_url: https://ocpws.kee.vizuri.com:8443
+    ec2_name_prefix: ocpws
+    ec2_region: us-east-1
+    s3_state: present
+    student_pwd: workshop1!
+    lab_dirs:
+     - Exercise-1
+     - Exercise-2
+     - Exercise-3
+     - Exercise-4
+     - Exercise-5
+     - Exercise-6
+     - Exercise-7
+     - Exercise-8
+     - Exercise-9
+
+  tasks:
+  - include_tasks: setup-student-website.yml 
+    with_items: "{{ lookup('sequence','start='+students_start|string + ' end='+students_end|string,wantlist=True) }}"
+    loop_control:
+      loop_var: student_number
+
+  - name: Delete working directories
+    file:
+      path: '{{ working_dir }}'
+      state: absent
+    with_items:
+     - '{{ working_dir }}'
+     - '{{ html_dir }}'

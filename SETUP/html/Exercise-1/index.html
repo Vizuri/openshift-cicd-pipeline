@@ -1,0 +1,99 @@
+<html>
+  <head>
+    <title>Advanced Container CI/CD Workshop Labs</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.min.css">
+    <style>
+      img[alt="car-thumbnail"] {
+        width: 30vw;
+        height: 30vw;
+        display: inline-block;
+        object-fit: cover;
+      }
+      img[alt="car-thumbnail"] + br {
+        display: none;
+      }
+    </style>
+  </head>
+  <body class="markdown-body">
+<a href=/>Home</a>   
+<h1>Advanced Container CI/CD Workshop Labs</h1>
+<hr/>
+
+<h1>Exercise 1 - Explore Lab Environment</h1>
+
+<h2>Explore OpenShift Environment</h2>
+
+<p>Navigate to the OpenShift Console</p>
+
+<p><a href="https://ocpws.kee.vizuri.com:8443"><a href='https://ocpws.kee.vizuri.com:8443'>https://ocpws.kee.vizuri.com:8443</a></a></p>
+
+<ul>
+<li>Username: student-55</li>
+<li>Password: workshop1!</li>
+</ul>
+
+<p>You have four projects pre-created for you</p>
+
+<ul>
+<li>CICD - Tools needed for CICD Pipeline
+<ul><li>anchore - Container Scanning Service</li>
+<li>anchoredb - Database for Anchore Container Scanning Service</li>
+<li>jenkins - Jenkins</li>
+<li>nexus - Nexus artifact reposigory</li>
+<li>sonarqube - Code Quality Service</li>
+<li>sonardb - Database for Code Quality Service</li></ul></li>
+<li>Customer Development - Development Project
+<ul><li>customerdb - Mongo Database for Development Service</li></ul></li>
+<li>Customer Test - Test Project
+<ul><li>customerdb - Mongo Database for Test Service</li></ul></li>
+<li>Customer Prod - Production Project
+<ul><li>customerdb - Mongo Database for Production Service</li></ul></li>
+</ul>
+
+<h2>Explore Jenkins</h2>
+
+<p><a href="http://jenkins-student-55-cicd.apps.ocpws.kee.vizuri.com"><a href='http://jenkins-student-55-cicd.apps.ocpws.kee.vizuri.com'>http://jenkins-student-55-cicd.apps.ocpws.kee.vizuri.com</a></a></p>
+
+<ul>
+<li>Username: student-55</li>
+<li>Password: workshop1!</li>
+</ul>
+
+<h2>Explore Nexus</h2>
+
+<p><a href="http://nexus-student-55-cicd.apps.ocpws.kee.vizuri.com"><a href='http://nexus-student-55-cicd.apps.ocpws.kee.vizuri.com'>http://nexus-student-55-cicd.apps.ocpws.kee.vizuri.com</a></a></p>
+
+<h2>Explore Quay Registry</h2>
+
+<p><a href="https://quay.apps.ocpws.kee.vizuri.com/repository"><a href='https://quay.apps.ocpws.kee.vizuri.com/repository'>https://quay.apps.ocpws.kee.vizuri.com/repository</a></a></p>
+
+<ul>
+<li>Username: student-55</li>
+<li>Password: workshop1!</li>
+</ul>
+
+<h2>Explore SonarQube</h2>
+
+<p><a href="http://sonarqube-student-55-cicd.apps.ocpws.kee.vizuri.com"><a href='http://sonarqube-student-55-cicd.apps.ocpws.kee.vizuri.com'>http://sonarqube-student-55-cicd.apps.ocpws.kee.vizuri.com</a></a></p>
+
+<ul>
+<li>Username: admin</li>
+<li>Password: admin</li>
+</ul>
+
+<h2>Explore Gogs (git repositories)</h2>
+
+<p><a href="http://gogs.apps.ocpws.kee.vizuri.com"><a href='http://gogs.apps.ocpws.kee.vizuri.com'>http://gogs.apps.ocpws.kee.vizuri.com</a></a></p>
+
+<ul>
+<li>Username: student-55</li>
+<li>Password: workshop1!</li>
+</ul>
+
+<h3>Repositories:</h3>
+
+<ul>
+<li>customer-service - SpringBoot REST Web Service utilized as demo project to orchestrate through our CI/CD process.</li>
+</ul>
+  </body>
+</html>

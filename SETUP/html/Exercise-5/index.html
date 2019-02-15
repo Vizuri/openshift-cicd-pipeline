@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <title>Advanced Container CI/CD Workshop Labs</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.min.css">
+    <style>
+      img[alt="car-thumbnail"] {
+        width: 30vw;
+        height: 30vw;
+        display: inline-block;
+        object-fit: cover;
+      }
+      img[alt="car-thumbnail"] + br {
+        display: none;
+      }
+    </style>
+  </head>
+  <body class="markdown-body">
+<a href=/>Home</a>   
+<h1>Advanced Container CI/CD Workshop Labs</h1>
+<hr/>
+
+<h1>Exercise 5: Publish Build Artifact</h1>
+
+<p>The next step in the process is to publish the build artifact to our Nexus Repository.</p>
+
+<p>Add the following stage to the Jenkins file.</p>
+
+<div class="highlight"><pre lang="">...
+    stage('Deploy Build Artifact') { 
+        sh "mvn -s configuration/settings.xml -DskipTests=true -Dbuild.number=${release_number} -Dnexus.url=${nexusUrl} deploy"    
+    }
+...
+
+</pre></div>
+  </body>
+</html>

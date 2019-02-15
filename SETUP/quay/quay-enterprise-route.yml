@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Route
+metadata:
+  name: quay-enterprise
+spec:
+  host: quay-enterprise-quay-enterprise.apps.ocpws.kee.vizuri.com
+  port:
+    targetPort: http
+  to:
+    kind: Service
+    name: quay-enterprise

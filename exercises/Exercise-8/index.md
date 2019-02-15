@@ -23,13 +23,14 @@ In Jenkins, click on Manage Jenkins -> Configure System.
 Scroll down to the OpenShift Client Plugin Section.   Press the Add OpenShift Cluster button and choose OpenShift Cluster.
 
 Enter the following values:
+
 * Cluster name: ocp-ws
 * API Server URL: <{{ ocp_console_url }}>
 * Disable TLS Verify: Check
 * Credentials: Click Add and Select Jenkins to Create new Credentials.  
-    * Kind: OpenShift Token for OpenShift Client Plugin
-    * ID: ocp-ws
-    * Token: Past token retrieved above.
+	* Kind: OpenShift Token for OpenShift Client Plugin
+	* ID: ocp-ws
+	* Token: Past token retrieved above.
 
 ![alt text](../images/image19.png)
 

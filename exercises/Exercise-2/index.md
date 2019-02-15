@@ -19,11 +19,16 @@ Choose Install without Restart.
 ## Configure Kubernetes Cloud
 The Kubernetes Cloud plugin allows for the running of Kubernetes/OpenShift PODs as Jenkins JNLP Slaves
 
-The OpenShift Jenkins Template configures a Kubernetes Cloud configuration for the current  OpenShift environment.  It provides two out-of-the-box Kubernetes Pod Templates to be Jenkins Slaves; maven and nodejs.  
-Configure Podman Kubernetes Pod Template
-We will be using podman to build our container images so we need to include a new Kubernetes Pod Template that includes the podman binary.  
+The OpenShift Jenkins deployment provides a Kubernetes Cloud setup.
+It has two out-of-the-box Kubernetes Pod Templates for Jenkins jobs; maven and nodejs.  
 
-The Dockerfile for the podman image can be found here:
+We will be using podman to build our containers and pushing them to our container registry.  
+
+A image has alreay been build for this container.  It can be found at:
+
+<docker.io/vizuri/podman:v1.0>
+
+If you would like to see the Dockerfile it can be found here:
 
 <https://github.com/Vizuri/openshift-cicd-podman-jenkins-slave>
 
@@ -31,13 +36,14 @@ This container extends the OpenShift Maven image and just adds the podman binary
 
 In Jenkins, navigate to the Manage Jenkins -> Configure System.  Scroll down to the Cloud->Kubernetes section.  
 
-Notice the provided configuration.  
+Notice the provided configurations.  
 
-Let’s add our Podman Kubernetes Pod Template.
+Add our Podman Kubernetes Pod Template.
 
 Click on the Add Pod Template button and choose Kubernetes Pod Template.
 
 Enter the following values:
+
 * Name: maven-podman
 * Labels maven-podman
 
@@ -46,15 +52,16 @@ Enter the following values:
 
 Click on the Add Container button and choose Container Template.
 
-* Enter the following values:
+Enter the following values:
+
 * Name: jnlp
 * Docker Image: docker.io/vizuri/podman:v1.0
 * Working directory: /tmp
-* Command to run: <EMPTY>
+* Command to run: <Clear Out The Contents of this Parameter>
 * Arguments to pass to the command: ${computer.jnlpmac} ${computer.name}
 
 
-![alt text](../images/image-100.png)
+![alt text](../images/Image-100.png)
 
 Click the Add Volume button and choose Empty Dir Volume
 

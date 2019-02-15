@@ -1,0 +1,66 @@
+<html>
+  <head>
+    <title>Advanced Container CI/CD Workshop Labs</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.min.css">
+    <style>
+      img[alt="car-thumbnail"] {
+        width: 30vw;
+        height: 30vw;
+        display: inline-block;
+        object-fit: cover;
+      }
+      img[alt="car-thumbnail"] + br {
+        display: none;
+      }
+    </style>
+  </head>
+  <body class="markdown-body">
+<a href=/>Home</a>   
+<h1>Advanced Container CI/CD Workshop Labs</h1>
+<hr/>
+
+<h1>Exercise 4 - Add Code Analysis</h1>
+
+<p>SonarQube analyzes the source code for common issue and test coverage.  In this lab, you will add stages to perform analysis of you code.</p>
+
+<p>Edit the Jenkinsfile for the customer-service project and add the following two stages to the build pipeline after the Unit Test stage.</p>
+
+<div class="highlight"><pre lang="">...
+    stage ('Unit Test') {
+        sh "mvn -s configuration/settings.xml -Dnexus.url=${nexusUrl}  -Dbuild.number=${release_number} test"
+        junit "target/surefire-reports/*.xml"
+
+<pre><code>     tep([$class: 'XUnitBuilder',
+        thresholds: [
+            [$class: 'FailedThreshold', unstableThreshold: '1']
+        ],
+        tools: [
+            [$class: "JUnitType", pattern: "target/surefire-reports/*.xml"]
+        ]])
+}
+
+stage('SonarQube Analysis') {
+    withSonarQubeEnv('sonar') { sh "mvn -s configuration/settings.xml -Dnexus.url=${nexusUrl} -Dbuild.number=${release_number}  sonar:sonar" }
+}
+
+
+stage("Quality Gate"){
+    timeout(time: 1, unit: 'HOURS') {
+        def qg = waitForQualityGate()
+        if (qg.status != 'OK') {
+            error "Pipeline aborted due to quality gate failure: ${qg.status}"
+        }
+    }
+}
+</code></pre>
+
+...
+</pre></div>
+
+<p>Rebuild Project.</p>
+
+<p>Once complete, notice the SonarQube link on the left navigation.  You can click this to see the results of the analysis.  </p>
+
+<p><img src="../images/image8.png" alt="alt text" title="" /></p>
+  </body>
+</html>

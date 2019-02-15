@@ -28,6 +28,8 @@ You have four projects pre-created for you
 
 ## Explore Jenkins
 
+Confirm you can log into your jenkins console.  
+
 <http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}>
 
 * Username: student-{{ student_number }}
@@ -35,9 +37,13 @@ You have four projects pre-created for you
 
 ## Explore Nexus
 
+Confirm you can navigate to nexus.
+
 <http://nexus-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}>
 
 ## Explore Quay Registry 
+
+Confirm you can log into the Quay Container Registry
 
 <https://quay.{{ ocp_app_suffix }}/repository>
 
@@ -46,6 +52,8 @@ You have four projects pre-created for you
 
 ## Explore SonarQube
 
+Confirm you can log into the sonarqube console
+
 <http://sonarqube-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}>
 
 * Username: admin
@@ -53,10 +61,14 @@ You have four projects pre-created for you
 
 ## Explore Gogs (git repositories) 
 
+Confirm you can log into the gogs git server.
+
 <http://gogs.{{ ocp_app_suffix }}>
 
 * Username: student-{{ student_number }}
 * Password: {{ student_pwd }}
+
+You have one repository that we will use for the labs.
 
 ### Repositories:
 * customer-service - SpringBoot REST Web Service utilized as demo project to orchestrate through our CI/CD process.

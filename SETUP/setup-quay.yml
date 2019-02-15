@@ -1,0 +1,46 @@
+---
+- name: Setup Quay
+  hosts: config
+  become: true
+
+  tasks:
+  - name: Copy OpenShift Templates
+    copy:
+      src: quay
+      dest: /tmp
+
+  - name: Deploy Quay
+    shell: |
+      oc create -f /tmp/quay/quay-enterprise-namespace.yml
+      oc project quay-enterprise
+      oc create -f /tmp/quay/quay-enterprise-config-secret.yml
+      
+      oc create sa quay
+      
+      oc create secret generic coreos-pull-secret \
+          --from-file=.dockerconfigjson=/tmp/quay/quay-config.json \
+          --type=kubernetes.io/dockerconfigjson
+            
+      oc secrets link default coreos-pull-secret --for=pull
+      
+      oc create -f /tmp/quay/quay-servicetoken-role-k8s1-6.yaml
+      
+      oc create -f /tmp/quay/quay-servicetoken-role-binding-k8s1-6.yaml
+      
+      oc adm policy add-scc-to-user anyuid system:serviceaccount:quay-enterprise:quay
+      
+      
+      oc new-app --template postgresql-persistent --name=quaydb -p DATABASE_SERVICE_NAME=quaydb -p POSTGRESQL_USER=quay -p POSTGRESQL_PASSWORD=quay -p POSTGRESQL_DATABASE=quay
+      
+      oc create -f /tmp/quay/quay-enterprise-redis.yml
+      oc create -f /tmp/quay/quay-enterprise-app-rc.yml
+      oc create -f /tmp/quay/quay-enterprise-service.yml
+      
+      oc create -f /tmp/quay/quay-enterprise-route.yml
+      oc create -f /tmp/quay/quay-enterprise-route-ssl.yml
+
+      oc create serviceaccount clair
+      oc adm policy add-cluster-role-to-user cluster-admin system:serviceaccount:clair-controller:clair
+      oc adm policy add-scc-to-user anyuid system:serviceaccount:quay-enterprise:clair
+      oc create secret generic clair-certs --from-file=/tmp/quay/certs/rootCA.crt
+      oc new-app -f /tmp/quay/clair.yaml

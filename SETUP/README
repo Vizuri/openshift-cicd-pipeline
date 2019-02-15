@@ -1,0 +1,25 @@
+Run these commands to setup environment:
+
+  ansible-playbook -i hosts setup-quay.yml
+
+Follow instructions in README-QUAY to configure quay
+
+  ansible-playbook -i hosts setup-gogs.yml
+
+Follow instructions in README-GOGS to configure gogs
+
+Update setup-gogs-repos.yml for the environment:
+
+Run 
+
+  ansible-playbook setup-gogs-repos.yml
+
+Then run 
+
+  ansible-playbook -i hosts setup-cicd-playbook.yml
+  ansible-playbook -i hosts  setup-students.yml
+
+  ansible-playbook add-student-repository-to-anchore.yml 
+
+  ansible-playbook setup-labs-website.yml
+

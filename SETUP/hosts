@@ -1,0 +1,25 @@
+[all:vars]
+students_start=50
+students_end=55
+
+app_domain=apps.ocpws.kee.vizuri.com
+
+
+
+ansible_connection=ssh
+ansible_ssh_user=ec2-user
+ansible_ssh_private_key_file=/root/.ssh/kenteudy-aws
+#ansible_ssh_private_key_file=/Users/keudy/.ssh/kenteudy-aws
+ansible_become=true
+
+
+[config]
+172.31.32.169 openshift_node_group_name='node-config-master-infra'
+#172.31.83.191 openshift_node_group_name='node-config-master-infra'
+
+[nodes]
+172.31.32.169 openshift_node_group_name='node-config-master-infra'
+172.31.35.173 openshift_node_group_name='node-config-master-infra'
+172.31.34.165 openshift_node_group_name='node-config-master-infra'
+
+172.31.38.147 openshift_node_group_name="node-config-compute"
