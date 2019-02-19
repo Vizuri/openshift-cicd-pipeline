@@ -37,9 +37,9 @@ Confirm you can log into your jenkins console.
 * Username: student-{{ student_number }}
 * Password: {{ student_pwd }}
 
-    >Note: Click on the **Allow selected permissions** button the first time: ![alt text](../images/jenkins_accept.png)
+    >Note: Click on the **Allow selected permissions** button the first time: <img src="../images/jenkins_accept.png" width="500"> 
 
-Should see the message: ![alt text](../images/jenkins_welcome.png)
+Should see the message: <img src="../images/jenkins_welcome.png" alt="jenkins_welcome" width="200">
 
 ## Explore Nexus
 
