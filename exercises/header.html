@@ -26,15 +26,19 @@
     </style>
 
     <script>
-        function copyToClipboard(elementId) {
-            /* Get the text field */
-            var copyText = document.getElementById(elementId);
+        function copyToClipboard(inputText) {
+            
+            if (inputText){
+                var el = document.createElement('textarea');
+                document.body.appendChild(el);
 
-            /* Select the text field */
-            copyText.select();
+                el.value = inputText;
 
-            /* Copy the text inside the text field */
-            document.execCommand("copy");
+                /* Copy the text inside the text field */
+                el.select();
+                document.execCommand('copy');
+                document.body.removeChild(el);
+            }
 
         }
     </script>

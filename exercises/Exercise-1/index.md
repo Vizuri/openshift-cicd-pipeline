@@ -4,13 +4,11 @@
 
 Navigate to the OpenShift Console
 
-<{{ ocp_console_url }}>{#openshift_url} <button onclick="copyToClipboard('openshift_url')">Copy text</button>
+<{{ ocp_console_url }}> <button onclick="copyToClipboard('{{ ocp_console_url }}')">Copy URL</button>
 
-<img src="../images/copy-paste.jpeg" onclick="copyToClipboard('openshift_url')" alt="copy-paste" width="20">
+<img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ ocp_console_url }}')" alt="copy-paste" width="20">
 
-You can do anything at [Read more](http://www.stackoverflow.com "read more"){#link-sf .btn-read-more}
-
-* Username: student-{{ student_number }}
+* Username: student-{{ student_number }} <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20">
 * Password: {{ student_pwd }}
 
     >Note: Click on the **Advanced** button and click on the link: **Proceed to ocpws.kee.vizuri.com (unsafe)**
