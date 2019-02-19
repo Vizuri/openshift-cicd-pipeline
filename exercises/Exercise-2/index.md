@@ -40,9 +40,12 @@ In Jenkins, navigate to the Manage Jenkins
  * Notice the provided configurations.
  * Add our Podman Kubernetes Pod Template by clicking on the *Add Pod Template* button at the bottom of the page and choose *Kubernetes Pod Template*.
  * Enter the following values:
-    * Name: maven-podman <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('maven-podman')" alt="copy-paste" width="20">
-    * Labels maven-podman
-    ![alt text](../images/add_container.png)
+    * Name: ```maven-podman``` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('maven-podman')" alt="copy-paste" width="20">
+    * Labels ```maven-podman```
+    
+    
+    <img src="../images/add_container.png" alt="add_container" width="60%">
+    
 
  * Click on the *Add Container* button and choose *Container Template*.
  * Enter the following values:
@@ -54,13 +57,15 @@ In Jenkins, navigate to the Manage Jenkins
         >*Note: Clear Out The Contents of this Parameter*
     * Arguments to pass to the command: ```${computer.jnlpmac} ${computer.name}```
 
-    ![alt text](../images/Image-100.png)
+   
+    <img src="../images/Image-100.png" alt="Image-100" width="60%">
 
  * Click the *Add Volume* button and choose: ```Empty Dir Volume```
  * Enter the following values:
     * Mount path: ```/var/lib/containers```
 
-![alt text](../images/image10.png)
+
+    <img src="../images/image10.png" alt="image10" width="60%">
 
  * Save your changes by clicking on the *Save* button at the bottom.
 
@@ -75,7 +80,9 @@ In Jenkins, navigate to the Manage Jenkins
     * Engine URL: ```http://anchore-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}``` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://anchore-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}')" alt="copy-paste" width="20">
     * Engine Username: ```admin``` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('admin')" alt="copy-paste" width="20">
     * Engine Password: ```foobar``` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('foobar')" alt="copy-paste" width="20">
-    ![alt text](../images/image3.png)
+   
+    
+    <img src="../images/image3.png" alt="image3" width="60%">
 
  * Save your changes by clicking on the *Save* button at the bottom.
 
@@ -86,49 +93,48 @@ In Jenkins, navigate to the Manage Jenkins
  * Scroll down to *Configure System*
  * Scroll down to the *SonarQube* servers section.
  * Click the *Add SonarQube* button.
+ * Enter the following values:
+    * Name: ```sonar```
+    * Server URL: ```http://sonarqube-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}``` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://sonarqube-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}')" alt="copy-paste" width="20">
 
-Enter the following values:
-* Name: sonar
-* Server URL: <http://sonarqube-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}>
+    
+    <img src="../images/image9.png" alt="image9" width="60%">
+
+ * Scroll down to the *Quality Gates SonarQube*
+ * Click the *Add Sonar Instance* button
+ * Enter the following values:
+
+    * Name: ```sonar```
+    * SonarQube Server URL: ```http://sonarqube-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}``` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://sonarqube-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}')" alt="copy-paste" width="20">
+    * SonarQube account login: ```admin```
+    * SonarQube account password: ```admin```
 
 
-![alt text](../images/image9.png)
+    <img src="../images/image11.png" alt="image11" width="60%">
 
-Scroll down to the Quality Gates SonarQube
-
-Click the Add Sonar Instance button
-
-Enter the following values:
-
-* Name: sonar
-* SonarQube Server URL: <http://sonarqube-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}>
-* SonarQube account login: admin
-* SonarQube account password: admin
-
-![alt text](../images/image11.png)
-
-Click the Save button
+ * Click the *Save* button
 
 ## Configure SonarQube Jenkins WebHook.
-Login into your SonarQube Server.
 
-<http://sonarqube-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}>
+* Login into your SonarQube Server.
 
-Click the Login button and enter
+    <http://sonarqube-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}> <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://sonarqube-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}')" alt="copy-paste" width="20">
+    
+* Click the Login button and enter:
+    * Username: ```admin```
+    * Password: ```admin```
 
-* Username: admin
-* Password: admin
+* And press the *Login* button. 
 
-And press the Login button. 
+* Click skip this tutorial on the pop-up.
 
-Click skip this tutorial on the pop-up.
+* Click on *Administration* and then choose *WebHooks*.
 
-Click on Administration and then choose WebHooks.
+* Enter the following values:
+    * Name: ```Jenkins```
+    * URL: ```http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}/sonarqube-webhook/``` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}/sonarqube-webhook/')" alt="copy-paste" width="20">
 
-Enter the following values:
-* Name: Jenkins
-* URL: <http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}/sonarqube-webhook/>
 
-![alt text](../images/image1.png)
+    <img src="../images/image1.png" alt="image1" width="60%">
 
-Click Save
+ * Click the *Save* button
