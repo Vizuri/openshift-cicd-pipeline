@@ -1,20 +1,17 @@
-# Exercise 4 - Build Java Pipeline
+# Exercise 3 - Build Java Pipeline
 
 In this lab, you will create a Jenkins Pipeline Job that checks out a SpringBoot microservice project and builds a JAR archive.
-Create Jenkinsfile for Build
 
-Log into the Gogs.
+## Create Jenkinsfile for Build
 
-<http://gogs.{{ ocp_app_suffix }}>
+* Sign into the Gogs (top right): <http://gogs.{{ ocp_app_suffix }}> <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://gogs.{{ ocp_app_suffix }}')" alt="copy-paste" width="20">
 
-* Username: student-{{ student_number }}
-* Password: {{ student_pwd }}
+    * Username: `student-{{ student_number }}` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20">
+    * Password: `{{ student_pwd }}` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20">
 
 
-Click on the customer-service repository.
-
-Create a new file in the root of the customer-service repository called Jenkinsfile with the following contents.
-
+* Click on the customer-service repository.
+* Create a new file in the root of the customer-service repository called Jenkinsfile with the following contents.
 
 ```
 def app_name = "customer";
@@ -82,23 +79,22 @@ node ("maven-podman") {
 }
 ```
 
-Configure Jenkins Job to Build Code
-Log into Jenkins.
+## Configure Jenkins Job to Build Code
 
-<http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}>
+* Log into [Jenkins](<http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}>) <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}')" alt="copy-paste" width="20">
 
-* Username: student-{{ student_number }}
-* Password: {{ student_pwd }}
+    * Username: 'student-{{ student_number }}'
+    * Password: '{{ student_pwd }}'
 
-Click on New Item.
+* Click on *New Item*.
 
-Enter the following values:
+* Enter the following values:
 
-Enter an Item Name: customer-service
+    * Item Name: `customer-service`
+    * Choose: `Multibranch pipeline`
 
-Choose: Multibranch pipeline
 
-![alt text](../images/image18.png)
+    <img src="../images/image18.png" alt="image18" width="60%">
 
 Click OK to Create the customer-service project.
 
