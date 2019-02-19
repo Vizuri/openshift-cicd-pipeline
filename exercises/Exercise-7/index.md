@@ -8,7 +8,7 @@ Add the following lines to the Jenkinsfile.
 	if (BRANCH_NAME ==~ /(develop|release.*)/) {		
 		stage('Container Scan') {
 			writeFile file: 'anchore_images', text: "${imageBase}/${imageNamespace}/${app_name}:${tag} Dockerfile"
-			anchore engineRetries: '800', name: 'anchore_images'
+			anchore engineRetries: '1000', name: 'anchore_images'
 		}
 	}
 ```
