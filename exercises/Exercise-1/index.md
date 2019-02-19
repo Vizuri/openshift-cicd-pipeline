@@ -4,7 +4,10 @@
 
 Navigate to the OpenShift Console
 
-<{{ ocp_console_url }}>
+<id="openshift_url" {{ ocp_console_url }}> <button onclick="copyToClipboard('openshift_url')">Copy text</button>
+
+<img src="../images/copy-paste.jpeg" onclick="copyToClipboard('openshift_url')" alt="copy-paste" width="20">
+
 
 * Username: student-{{ student_number }}
 * Password: {{ student_pwd }}

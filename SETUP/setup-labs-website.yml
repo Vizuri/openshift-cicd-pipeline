@@ -6,7 +6,7 @@
 
   vars:
     students_start: 50 
-    students_end: 55 
+    students_end: 51
     working_dir: working
     html_dir: html
     workshop_dns_zone: kee.vizuri.com
