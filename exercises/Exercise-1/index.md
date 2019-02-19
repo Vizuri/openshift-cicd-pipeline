@@ -37,9 +37,11 @@ Confirm you can log into your jenkins console.
 * Username: student-{{ student_number }}
 * Password: {{ student_pwd }}
 
-    >Note: Click on the **Allow selected permissions** button the first time: <img src="../images/jenkins_accept.png" width="500"> 
+    >Note: Click on the **Allow selected permissions** button the first time: <img src="../images/jenkins_accept.png" alt="jenkins_accept" width="500"> 
 
-Should see the message: <img src="../images/jenkins_welcome.png" alt="jenkins_welcome" width="200">
+Should see the message: 
+
+<img src="../images/jenkins_welcome.png" alt="jenkins_welcome" width="200">
 
 ## Explore Nexus
 
@@ -47,7 +49,9 @@ Confirm you can navigate to nexus.
 
 <http://nexus-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}>
 
-Should see the message: ![alt text](../images/nexus_welcome.png)
+Should see the message: 
+
+<img src="../images/nexus_welcome.png" alt="nexus_welcome" width="400">
 
 ## Explore Quay Registry 
 
@@ -69,7 +73,9 @@ Confirm you can log into the sonarqube console
 * Username: admin
 * Password: admin
 
-Should see the page: ![alt text](../images/sonarqube_welcome.png)
+Should see the page: 
+
+<img src="../images/sonarqube_welcome.png" alt="sonarqube_welcome" width="500">
 
 ## Explore Gogs (git repositories) 
 

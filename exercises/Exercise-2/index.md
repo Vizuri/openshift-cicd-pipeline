@@ -1,7 +1,7 @@
 # Exercise 2 - Configure Jenkins Plugins
 
 ## Install Jenkins Plugins
-In Jenkins, navigate to Manage Jenkins.  
+In [Jenkins] (http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}), navigate to Manage Jenkins.  
 
 Choose Manage Plugins.  
 
