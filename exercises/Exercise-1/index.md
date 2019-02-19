@@ -4,12 +4,10 @@
 
 Navigate to the OpenShift Console
 
-<{{ ocp_console_url }}> <button onclick="copyToClipboard('{{ ocp_console_url }}')">Copy URL</button>
-
-<img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ ocp_console_url }}')" alt="copy-paste" width="20">
+<{{ ocp_console_url }}> <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ ocp_console_url }}')" alt="copy-paste" width="20">
 
 * Username: student-{{ student_number }} <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20">
-* Password: {{ student_pwd }}
+* Password: {{ student_pwd }} <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20">
 
     >Note: Click on the **Advanced** button and click on the link: **Proceed to ocpws.kee.vizuri.com (unsafe)**
     
@@ -34,7 +32,7 @@ You have four projects pre-created for you (*Under My Projects on the right*)
 
 Confirm you can log into your jenkins console.  
 
-<http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}>
+<http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}> <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}')" alt="copy-paste" width="20">
 
 * Username: student-{{ student_number }}
 * Password: {{ student_pwd }}
@@ -49,7 +47,7 @@ Should see the message:
 
 Confirm you can navigate to nexus.
 
-<http://nexus-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}>
+<http://nexus-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}> <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://nexus-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}')" alt="copy-paste" width="20">
 
 Should see the message: 
 
@@ -59,7 +57,7 @@ Should see the message:
 
 Confirm you can log into the Quay Container Registry
 
-<https://quay.{{ ocp_app_suffix }}/repository>
+<https://quay.{{ ocp_app_suffix }}/repository> <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('https://quay.{{ ocp_app_suffix }}/repository')" alt="copy-paste" width="20">
 
 * Username: student-{{ student_number }}
 * Password: {{ student_pwd }}
@@ -70,7 +68,7 @@ Confirm you can log into the Quay Container Registry
 
 Confirm you can log into the sonarqube console
 
-<http://sonarqube-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}>
+<http://sonarqube-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}> <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://sonarqube-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}')" alt="copy-paste" width="20">
 
 * Username: admin
 * Password: admin
@@ -83,7 +81,7 @@ Should see the page:
 
 Confirm you can log into the gogs git server.
 
-<http://gogs.{{ ocp_app_suffix }}>
+<http://gogs.{{ ocp_app_suffix }}> <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://gogs.{{ ocp_app_suffix }}')" alt="copy-paste" width="20">
 
 * Username: student-{{ student_number }}
 * Password: {{ student_pwd }}
