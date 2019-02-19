@@ -1,20 +1,19 @@
 # Exercise 2 - Configure Jenkins Plugins
 
 ## Install Jenkins Plugins
-In *[Jenkins](<http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}> "Jenkins")*, navigate to Manage Jenkins.  
+In *[Jenkins](<http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}> "Jenkins")*, navigate to *Manage Jenkins*.  
 
-Choose Manage Plugins.  
+    Scroll down and choose Manage Plugins.  
+    Choose the *Available* tab.
 
-Choose the Available tab.
+Install the following Plugins by selecting the checkbox: (*Use the filter on the top right to find the plugins*)
+   * Anchore Container Image Scanner (under Build Tools)
+   * Sonar Quality Gates
+   * SonarQube Scanner
+   * xUnit
+   * Gogs
 
-Install the following Plugins:
-* Anchore Container Image Scanner
-* Sonar Quality Gates Plugin
-* SonarQube Scanner for Jenkins
-* xUnit plugin
-* Gogs
-
-Choose Install without Restart.
+Click on the button *Install without Restart* at the bottom of the page.
 
 ## Configure Kubernetes Cloud
 The Kubernetes Cloud plugin allows for the running of Kubernetes/OpenShift PODs as Jenkins JNLP Slaves
@@ -24,9 +23,9 @@ It has two out-of-the-box Kubernetes Pod Templates for Jenkins jobs; maven and n
 
 We will be using podman to build our containers and pushing them to our container registry.  
 
-A image has alreay been build for this container.  It can be found at:
+An image has already been build for this container.  It can be found at:
 
-<docker.io/vizuri/podman:v1.0>
+<https://docker.io/vizuri/podman:v1.0>
 
 If you would like to see the Dockerfile it can be found here:
 
@@ -34,44 +33,38 @@ If you would like to see the Dockerfile it can be found here:
 
 This container extends the OpenShift Maven image and just adds the podman binary. 
 
-In Jenkins, navigate to the Manage Jenkins -> Configure System.  Scroll down to the Cloud->Kubernetes section.  
+In Jenkins, navigate to the Manage Jenkins 
 
-Notice the provided configurations.  
+ * Scroll down to *Configure System*
+ * Scroll down to the Cloud->Kubernetes section.  
+ * Notice the provided configurations.  
+ * Add our Podman Kubernetes Pod Template by clicking on the *Add Pod Template* button at the bottom of the page and choose *Kubernetes Pod Template*.
+ * Enter the following values:
+    
+    * Name: maven-podman <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('maven-podman')" alt="copy-paste" width="20">
+    * Labels maven-podman
 
-Add our Podman Kubernetes Pod Template.
+    ![alt text](../images/add_container.png)
 
-Click on the Add Pod Template button and choose Kubernetes Pod Template.
+ * Click on the *Add Container* button and choose *Container Template*.
+ * Enter the following values:
 
-Enter the following values:
+    * Name: ```jnlp```
+    * Docker Image: ```docker.io/vizuri/podman:v1.0```
+    * Working directory: ```/tmp```
+    * Command to run:   
+        >*Note: Clear Out The Contents of this Parameter*
+    * Arguments to pass to the command: ```${computer.jnlpmac} ${computer.name}```
 
-* Name: maven-podman
-* Labels maven-podman
+    ![alt text](../images/Image-100.png)
 
-
-![alt text](../images/image4.png)
-
-Click on the Add Container button and choose Container Template.
-
-Enter the following values:
-
-* Name: jnlp
-* Docker Image: docker.io/vizuri/podman:v1.0
-* Working directory: /tmp
-* Command to run: <Clear Out The Contents of this Parameter>
-* Arguments to pass to the command: ${computer.jnlpmac} ${computer.name}
-
-
-![alt text](../images/Image-100.png)
-
-Click the Add Volume button and choose Empty Dir Volume
-
-Enter the following values:
-
-* Mount path: /var/lib/containers
+ * Click the *Add Volume* button and choose: ```Empty Dir Volume```
+ * Enter the following values:
+    * Mount path: ```/var/lib/containers```
 
 ![alt text](../images/image10.png)
 
-Save your changes.
+ * Save your changes by clicking on the *Save* button at the bottom.
 
 ## Configure Anchore Plugin
 
