@@ -11,7 +11,7 @@ Navigate to the OpenShift Console
 
     >Note: Click on the **Advanced** button and click on the link: **Proceed to ocpws.kee.vizuri.com (unsafe)**
     
-You have four projects pre-created for you
+You have four projects pre-created for you (*Under My Projects on the right*)
 
 * CICD - Tools needed for CICD Pipeline
     * anchore - Container Scanning Service
@@ -37,11 +37,17 @@ Confirm you can log into your jenkins console.
 * Username: student-{{ student_number }}
 * Password: {{ student_pwd }}
 
+    >Note: Click on the **Allow selected permissions** button the first time: ![alt text](../images/jenkins_accept.png)
+
+Should see the message: ![alt text](../images/jenkins_welcome.png)
+
 ## Explore Nexus
 
 Confirm you can navigate to nexus.
 
 <http://nexus-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}>
+
+Should see the message: ![alt text](../images/nexus_welcome.png)
 
 ## Explore Quay Registry 
 
@@ -52,6 +58,8 @@ Confirm you can log into the Quay Container Registry
 * Username: student-{{ student_number }}
 * Password: {{ student_pwd }}
 
+    >Note: Click on the **Advanced** button and click on the link: **Proceed to quay.apps.ocpws.kee.vizuri.com (unsafe)**
+
 ## Explore SonarQube
 
 Confirm you can log into the sonarqube console
@@ -60,6 +68,8 @@ Confirm you can log into the sonarqube console
 
 * Username: admin
 * Password: admin
+
+Should see the page: ![alt text](../images/sonarqube_welcome.png)
 
 ## Explore Gogs (git repositories) 
 
