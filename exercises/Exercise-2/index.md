@@ -3,8 +3,8 @@
 ## Install Jenkins Plugins
 In *[Jenkins](<http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}> "Jenkins")*, navigate to *Manage Jenkins*.  
 
-    Scroll down and choose Manage Plugins.  
-    Choose the *Available* tab.
+   * Scroll down and choose Manage Plugins.
+   * Choose the *Available* tab.
 
 Install the following Plugins by selecting the checkbox: (*Use the filter on the top right to find the plugins*)
    * Anchore Container Image Scanner (under Build Tools)
@@ -36,14 +36,12 @@ This container extends the OpenShift Maven image and just adds the podman binary
 In Jenkins, navigate to the Manage Jenkins 
 
  * Scroll down to *Configure System*
- * Scroll down to the Cloud->Kubernetes section.  
- * Notice the provided configurations.  
+ * Scroll down to the Cloud->Kubernetes section.
+ * Notice the provided configurations.
  * Add our Podman Kubernetes Pod Template by clicking on the *Add Pod Template* button at the bottom of the page and choose *Kubernetes Pod Template*.
  * Enter the following values:
-    
     * Name: maven-podman <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('maven-podman')" alt="copy-paste" width="20">
     * Labels maven-podman
-
     ![alt text](../images/add_container.png)
 
  * Click on the *Add Container* button and choose *Container Template*.
@@ -58,7 +56,7 @@ In Jenkins, navigate to the Manage Jenkins
 
     ![alt text](../images/Image-100.png)
 
- * Click the *Add Volume* button and choose: ```Empty Dir Volume```
+ * Click the *Add Volume* button and choose: ```Empty Dir Volume```
  * Enter the following values:
     * Mount path: ```/var/lib/containers```
 
@@ -68,27 +66,26 @@ In Jenkins, navigate to the Manage Jenkins
 
 ## Configure Anchore Plugin
 
-In Jenkins, navigate to the Manage Jenkins -> Configure System.
-Scroll down to the Anchore Plugin Mode
+In Jenkins, navigate to the Manage Jenkins
+ 
+ * Scroll down to *Configure System*
+ * Scroll down to the *Anchore Plugin Mode*
+ * Enter the following values:
 
-Enter the following values:
+    * Engine URL: ```http://anchore-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}``` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://anchore-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}')" alt="copy-paste" width="20">
+    * Engine Username: ```admin``` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('admin')" alt="copy-paste" width="20">
+    * Engine Password: ```foobar``` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('foobar')" alt="copy-paste" width="20">
+    ![alt text](../images/image3.png)
 
-* Engine URL: <http://anchore-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}>
-* Engine Username: admin
-* Engine Password: foobar
-
-
-![alt text](../images/image3.png)
-
-Click Save
+ * Save your changes by clicking on the *Save* button at the bottom.
 
 
 ## Configure SonarQube Plugins
-In Jenkins, navigate to the Manage Jenkins -> Configure System.   
-
-Scroll down to the SonarQube servers section. 
-
-Click the Add SonarQube button.
+In Jenkins, navigate to the Manage Jenkins
+ 
+ * Scroll down to *Configure System*
+ * Scroll down to the *SonarQube* servers section.
+ * Click the *Add SonarQube* button.
 
 Enter the following values:
 * Name: sonar
