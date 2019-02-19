@@ -4,10 +4,11 @@
 
 Navigate to the OpenShift Console
 
-<id="openshift_url" {{ ocp_console_url }}> <button onclick="copyToClipboard('openshift_url')">Copy text</button>
+<{{ ocp_console_url }}>{#openshift_url} <button onclick="copyToClipboard('openshift_url')">Copy text</button>
 
 <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('openshift_url')" alt="copy-paste" width="20">
 
+You can do anything at [Read more](http://www.stackoverflow.com "read more"){#link-sf .btn-read-more}
 
 * Username: student-{{ student_number }}
 * Password: {{ student_pwd }}
