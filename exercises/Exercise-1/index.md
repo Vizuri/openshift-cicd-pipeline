@@ -9,6 +9,8 @@ Navigate to the OpenShift Console
 * Username: student-{{ student_number }}
 * Password: {{ student_pwd }}
 
+    >Note: Click on the **Advanced** button and click on the link: **Proceed to ocpws.kee.vizuri.com (unsafe)**
+    
 You have four projects pre-created for you
 
 * CICD - Tools needed for CICD Pipeline

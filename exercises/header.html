@@ -12,9 +12,27 @@
       img[alt="car-thumbnail"] + br {
         display: none;
       }
+
+      .column {
+        float: left;
+      }
+
+      /* Clear floats after the columns */
+      .row:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
     </style>
   </head>
   <body class="markdown-body">
-<a href=/>Home</a>   
-<h1>Advanced Container CI/CD Workshop Labs</h1>
-<hr/>
+
+  <div class="row">
+    <div class="column" style="width: 33.33%;"><img src="./images/vizuri_logo_new.png" id="logo" style="height: 80px;"></div>
+    <div class="column" style="padding-top: 30px;width: 60%;"></div>
+    <div class="column" style="padding-top: 30px;"><a href=/>Home</a></div>
+
+  </div>
+
+  <h1>Advanced Container CI/CD Workshop Labs</h1>
+  <hr/>
