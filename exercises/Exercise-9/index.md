@@ -12,17 +12,17 @@ This reusable pipeline supports a Feature, Develop and Release Branch.
 
 If the branch starts with `feature/...`, a featue pipeline is executed. This just builds and performs code analysis of the feature branch code. 
 
-<img src="../images/image15.png" alt="image15" width="50%">
+    <img src="../images/image15.png" alt="image15" width="50%">
 
 If the branch is develop, a development pipeline is executed.
 This builds the code, performs code analysis, pushes the build artifact to nexus, builds a container, pushes it to a quay registry, deploys the container to an openshift development project and then run integratino tests on the deployed code.
 
-<img src="../images/Image-101.png" alt="Image-101" width="50%">
+    <img src="../images/Image-101.png" alt="Image-101" width="50%">
 
 If the branch starts with release/..., a release pipeline is executed.
 This builds the code, performs code analysis, pushes the build artifact to nexus, builds a container, pushes it to a quay registry, prompts the user to confirm deployment to test, deploys the container to an openshift test project, run integratino tests aginst test, promps the user to confirm a deployment to production, depoys the container to production and then runs integration tests against projection.
 
-<img src="../images/Image-102.png" alt="Image-102" width="50%">
+    <img src="../images/Image-102.png" alt="Image-102" width="50%">
 
 ## Test Shared Library
 
@@ -63,14 +63,16 @@ Create a new branch feature branch and test it in Jenkins:
 
      >Note that in practice a webhook should be configured to automatically trigger the build when a new branch is created. 
 
-    <img src="../images/scan_multibranch_pipeline.png" alt="scan_multibranch_pipeline" width="10%">
+    <img src="../images/scan_multibranch_pipeline.png" alt="scan_multibranch_pipeline" width="15%">
 
 ### Test Develop Branch
 Create a Pull Request and merge the Feature Branch into the Develop Branch.   
 
-* Click on *Scan Multibranch Pipeline Now* link on the left.  This will trigger the develop branch build.
+   * Click on *Scan Multibranch Pipeline Now* link on the left.  This will trigger the develop branch build.
 
 ### Release Develop Branch
 Create a release branch called release/1.0 from the develop branch.  
-* Cick on *Scan Multibranch Pipeline Now* button.  This will trigger the develop branch build.  WHen prompted choose "Proceed" to deploy container to test and production environments.  
+ 
+   * Cick on *Scan Multibranch Pipeline Now* button.  This will trigger the develop branch build.  WHen prompted choose "Proceed" to deploy container to test and production environments. 
+    
 

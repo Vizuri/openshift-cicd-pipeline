@@ -47,10 +47,10 @@ C) Update Jenkinsfile
 
 ```
 
-    def ocp_cluster = "ocp-ws"
-    def ocpDevProject = "student-{{ student_number }}-customer-dev"
-    def ocpTestProject = "student-{{ student_number }}-customer-test"
-    def ocpProdProject = "student-{{ student_number }}-customer-prod"
+    def ocp_cluster = "ocp-ws";
+    def ocpDevProject = "student-{{ student_number }}-customer-dev";
+    def ocpTestProject = "student-{{ student_number }}-customer-test";
+    def ocpProdProject = "student-{{ student_number }}-customer-prod";
 
 ```
 
