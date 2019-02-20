@@ -59,8 +59,8 @@ A) In Jenkins, navigate to the Manage Jenkins
     * Arguments to pass to the command: `${computer.jnlpmac} ${computer.name}`
     * Click on *Advanced ...* and make sure the *Run in privileged mode* checkbox is selected
     
-   
-       
+    
+    <img src="../images/container_arguments.png" alt="container_arguments" width="40%">
 
  * Click the *Add Volume* button and choose: `Empty Dir Volume`
  * Enter the following values:
