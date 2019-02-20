@@ -13,4 +13,4 @@ The next step in the process is to publish the build artifact to our Nexus Repos
 
 ```
 
-* Rebuild Project.
+* Rebuild Project by returning to the customer-service develop job and trigger a build.

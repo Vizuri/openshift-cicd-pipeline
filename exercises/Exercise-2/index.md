@@ -1,19 +1,20 @@
 # Exercise 2 - Configure Jenkins Plugins
 
 ## Install Jenkins Plugins
-In *[Jenkins](<http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}> "Jenkins")*, navigate to *Manage Jenkins*.  
+A) In *[Jenkins](<http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}> "Jenkins")*, navigate to *Manage Jenkins*.  
 
    * Scroll down and choose Manage Plugins.
    * Choose the *Available* tab.
 
-Install the following Plugins by selecting the checkbox: (*Use the filter on the top right to find the plugins*)
+B) Install the following Plugins by selecting the checkbox: (*Use the filter on the top right to find the plugins*)
+   
    * Anchore Container Image Scanner (under Build Tools)
    * Sonar Quality Gates
    * SonarQube Scanner
    * xUnit
    * Gogs
 
-Click on the button *Install without Restart* at the bottom of the page.
+C) Click on the button *Install without Restart* at the bottom of the page.
 
 ## Configure Kubernetes Cloud
 The Kubernetes Cloud plugin allows for the running of Kubernetes/OpenShift PODs as Jenkins JNLP Slaves
@@ -33,7 +34,7 @@ If you would like to see the Dockerfile it can be found here:
 
 This container extends the OpenShift Maven image and just adds the podman binary. 
 
-In Jenkins, navigate to the Manage Jenkins 
+A) In Jenkins, navigate to the Manage Jenkins 
 
  * Scroll down to *Configure System*
  * Scroll down to the Cloud->Kubernetes section.
@@ -55,10 +56,11 @@ In Jenkins, navigate to the Manage Jenkins
     * Working directory: `/tmp`
     * Command to run:   
         >*Note: Clear Out The Contents of this Parameter*
-    * Arguments to pass to the command: ```${computer.jnlpmac} ${computer.name}```
-
+    * Arguments to pass to the command: `${computer.jnlpmac} ${computer.name}`
+    * Click on *Advanced ...* and make sure the *Run in privileged mode* checkbox is selected
+    
    
-    <img src="../images/Image-100.png" alt="Image-100" width="60%">
+    <img src="../images/container_arguments.png" alt="container_arguments" width="60%">
 
  * Click the *Add Volume* button and choose: `Empty Dir Volume`
  * Enter the following values:
@@ -71,7 +73,7 @@ In Jenkins, navigate to the Manage Jenkins
 
 ## Configure Anchore Plugin
 
-In Jenkins, navigate to the Manage Jenkins
+A) In Jenkins, navigate to the Manage Jenkins
  
  * Scroll down to *Configure System*
  * Scroll down to the *Anchore Plugin Mode*
@@ -88,7 +90,8 @@ In Jenkins, navigate to the Manage Jenkins
 
 
 ## Configure SonarQube Plugins
-In Jenkins, navigate to the Manage Jenkins
+
+A) In Jenkins, navigate to the Manage Jenkins
  
  * Scroll down to *Configure System*
  * Scroll down to the *SonarQube* servers section.

@@ -10,33 +10,33 @@ We will be using podman to build our container.
 
     def imageBase = "quay.{{ ocp_app_suffix }}";
     def imageNamespace = "student_{{ student_number }}";
-    def registryUsername = "student-{{ student_number }}"
-    def registryPassword = "{{ student_pwd }}"
+    def registryUsername = "student-{{ student_number }}";
+    def registryPassword = "{{ student_pwd }}";
 
 ```
 
 * Add the following steps to the Jenkinsfile by replacing the *Exercise 6 placeholder*  with the code below:
 
 ```
-
-	def tag = "${release_number}"
-	
-	if (BRANCH_NAME ==~ /(develop|release.*)/) {		
-		stage('Container Build') { 
-			sh "podman build -t ${imageBase}/${imageNamespace}/${app_name}:${tag} ." 
-		}
-		
-		stage("Container Push") {
-			if (BRANCH_NAME ==~ /(develop|release.*)/) {
-				sh "podman login -u ${registryUsername} -p ${registryPassword} ${imageBase}"
-				sh "podman push ${imageBase}/${imageNamespace}/${app_name}:${tag}"
-			}
-		}
-	}
+    
+    def tag = "${release_number}";
+    
+    if (BRANCH_NAME ==~ /(develop|release.*)/) {		
+        stage('Container Build') { 
+            sh "podman build -t ${imageBase}/${imageNamespace}/${app_name}:${tag} ." 
+        }
+        
+        stage('Container Push') {
+            if (BRANCH_NAME ==~ /(develop|release.*)/) {
+                sh "podman login -u ${registryUsername} -p ${registryPassword} ${imageBase}"
+                sh "podman push ${imageBase}/${imageNamespace}/${app_name}:${tag}"
+            }
+        }
+    }
 	
 ```
 
-* Rebuild Project.
+* Rebuild Project by returning to the customer-service develop job and trigger a build.
 * If you log into the Quay registry: <https://quay.{{ ocp_app_suffix }}>
   you will see your image. <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('https://quay.{{ ocp_app_suffix }}')" alt="copy-paste" width="20">
 

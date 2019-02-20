@@ -15,7 +15,7 @@ In the next step, we will scan the newly created image for issues and known vuln
 	
 ```
 
-* Rebuild Project.
+* Rebuild Project by returning to the customer-service develop job and trigger a build.
 * Once complete, you will see the Anchore Report Link associated with the build. 
     
    >Note: This step can take up to 9 minutes to run! 
