@@ -13,13 +13,13 @@ In this lab, you will create a Jenkins Pipeline Job that checks out a SpringBoot
 * Click on the customer-service repository.
 
     
-    <img src="../images/customer_service.png" alt="customer_service" width="60%">
+    <img src="../images/customer_service.png" alt="customer_service" width="40%">
 
 * Create a new file in the root of the customer-service repository 
    * Select the blue *New file*  button
     
         
-            <img src="../images/create_new_file.png" alt="create_new_file" width="60%">
+    <img src="../images/create_new_file.png" alt="create_new_file" width="60%">
     
    * Enter file name `Jenkinsfile` 
    * Copy the contents into the new file.
@@ -106,7 +106,7 @@ node ("maven-podman") {
     * Click *OK*
 
 
-    <img src="../images/image18.png" alt="image18" width="60%">
+    <img src="../images/image18.png" alt="image18" width="40%">
 
 * Click OK to Create the customer-service project.
 
@@ -117,7 +117,7 @@ node ("maven-podman") {
     * Project repository: `http://gogs.{{ ocp_app_suffix }}/student-{{ student_number }}/customer-service.git` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://gogs.{{ ocp_app_suffix }}/student-{{ student_number }}/customer-service.git')" alt="copy-paste" width="20">
 
 
-    <img src="../images/image16.png" alt="image16" width="60%">
+    <img src="../images/image16.png" alt="image16" width="50%">
 
 
 * Click the *Save* button.
@@ -130,9 +130,9 @@ node ("maven-podman") {
 * Navigate to Jenkins->customer-service->develop to see the status of the build.
 
     
-    <img src="../images/jenkins_build_status.png" alt="jenkins_build_status" width="60%">
+    <img src="../images/jenkins_build_status.png" alt="jenkins_build_status" width="20%">
 
-The Job should execute three stages; Checkout, Build and Unit Test.
+* The Job should execute three stages; Checkout, Build and Unit Test.
 
-
+    
     <img src="../images/image17.png" alt="image17" width="60%">
