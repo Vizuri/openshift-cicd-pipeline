@@ -12,7 +12,12 @@ A) First get the Jenkins Service Account Token from OpenShift to be used by the 
      
    * Navigate to the CICD Project on the top right of the screen.
    * Choose Resources -> Secrets on the left
+   
+         <img src="../images/resource_secret.png" alt="resource_secret" width="40%">
+           
    * Locate one of the two jenkins-token-XXXXX secrets.
+         
+         <img src="../images/token.png" alt="token" width="50%">
    * Click to view the secret
    * Click on Reveal the Secret to see the values.
    * Copy the value of the Token which is at the bottom of the page. Keep it in a temp file. It will be used in the next step below.
