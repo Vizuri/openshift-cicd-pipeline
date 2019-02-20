@@ -40,7 +40,7 @@ B) Configure Jenkins OpenShift Client Plugin.
 
    * Click Save to update the Jenkins Plugin.
 
-D) Update Jenkinsfile
+C) Update Jenkinsfile
  
    * Add the following variables to the top of the Jenkinsfile for the *customer-service* project. 
      Replace the *Exercise 8 variable placeholder*  with the code below:
@@ -54,7 +54,7 @@ D) Update Jenkinsfile
 
 ```
 
-* Add the following code to the bottom of the Jenkinsfile by replacing the *Exercise 8 placeholder*  with the code below:
+   * Add the following code to the bottom of the Jenkinsfile by replacing the *Exercise 8 placeholder*  with the code below:
 
 
 ```
@@ -97,4 +97,4 @@ D) Update Jenkinsfile
 * Once finished, you can log into OpenShift and navigate to the Customer Development project.  You should now have a customer POD running. 
 
 
-    <img src="../images/image13.png" alt="image13" width="40%">
+    <img src="../images/image13.png" alt="image13" width="50%">

@@ -25,5 +25,7 @@ In the next step, we will scan the newly created image for issues and known vuln
     
     
    >Note: New vulnerability are found each day. If you are one of the lucky ones and your build faild.
-   Click on the *Anchore Report (FAIL)* on the left hand side and see what vulnerability was found.
+   Click on the *Anchore Report (FAIL)* on the left hand side and see what vulnerability was found. 
+   To avoid the failure remove this new code from the Jenkinsfile and rebuild.
+ 
    

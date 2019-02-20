@@ -57,4 +57,4 @@ We will be using podman to build our container.
     * Once complete you will see the results of the scan.  
 
     
-    <img src="../images/repository_tags.png" alt="repository_tags" width="40%">
+    <img src="../images/repository_tags.png" alt="repository_tags" width="60%">
