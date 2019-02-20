@@ -5,11 +5,13 @@ Edit the Jenkinsfile for the customer-service project and add the following two 
 
 ```
 ...
+
+
 	stage ('Unit Test') {
 		sh "mvn -s configuration/settings.xml -Dnexus.url=${nexusUrl}  -Dbuild.number=${release_number} test"
 		junit "target/surefire-reports/*.xml"
 
-		 tep([$class: 'XUnitBuilder',
+		 step([$class: 'XUnitBuilder',
 			thresholds: [
 				[$class: 'FailedThreshold', unstableThreshold: '1']
 			],
@@ -31,6 +33,8 @@ Edit the Jenkinsfile for the customer-service project and add the following two 
 			}
 		}
 	}
+	
+	
 ...
 ```
 

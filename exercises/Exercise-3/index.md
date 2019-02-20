@@ -26,7 +26,7 @@ In this lab, you will create a Jenkins Pipeline Job that checks out a SpringBoot
 
 ```
 def app_name = "customer";
-def nexusUrl = "http://nexus-student-{{ student_number }}-cicd.{{ ocp_app_suffix }};
+def nexusUrl = "http://nexus-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}";
 def release_number;
 
 node ("maven-podman") {
@@ -86,8 +86,9 @@ node ("maven-podman") {
 	stage('Deploy Build Artifact') {
 		sh "mvn -s configuration/settings.xml -DskipTests=true -Dbuild.number=${release_number} -Dnexus.url=${nexusUrl} deploy"
     }
+    
 }
-```
+```{#jenkins_file_code}
 
    * At the bottom click the green  *Commit Changes* button
 
@@ -135,4 +136,4 @@ node ("maven-podman") {
 * The Job should execute three stages; Checkout, Build and Unit Test.
 
     
-    <img src="../images/image17.png" alt="image17" width="60%">
+    <img src="../images/image17.png" alt="image17" width="40%">
