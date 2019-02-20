@@ -18,25 +18,25 @@ B) Configure Jenkins OpenShift Client Plugin.
 
    * Enter the following values:
     
-        * Cluster name: `ocp-ws`
-        * API Server URL: `{{ ocp_console_url }}`
-        * Disable TLS Verify: `Check`
-        * Credentials: 
-            * Click Add and Select Jenkins to Create new Credentials.  
-        * Kind: `OpenShift Token for OpenShift Client Plugin`
-        * ID: `ocp-ws`
-        * Token: 
-          >Note: Past token retrieved above.
+      * Cluster name: `ocp-ws`
+      * API Server URL: `{{ ocp_console_url }}`
+      * Disable TLS Verify: `Check`
+      * Credentials: 
+         * Click Add and Select Jenkins to Create new Credentials.  
+      * Kind: `OpenShift Token for OpenShift Client Plugin`
+      * ID: `ocp-ws`
+      * Token: 
+        >Note: Past token retrieved above.
     
     
-        <img src="../images/image19.png" alt="image19" width="40%">
+       <img src="../images/image19.png" alt="image19" width="40%">
     
    * Click Add to create the new credential.
     
    * Select the new credential in the credentials drop down.
     
     
-        <img src="../images/image6.png" alt="image6" width="40%">
+    <img src="../images/image6.png" alt="image6" width="40%">
 
    * Click Save to update the Jenkins Plugin.
 
