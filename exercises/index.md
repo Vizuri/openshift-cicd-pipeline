@@ -8,4 +8,4 @@
 ## [Exercise 6 - Container Build ](Exercise-6) 
 ## [Exercise 7 - Scan Container Image ](Exercise-7) 
 ## [Exercise 8 - Deploy Image to OpenShift ](Exercise-8) 
-## [Exercise 9 - Full Pipeline From Shared Library ](Exercise-9) 
+## [Exercise 9 - Putting it all Together ](Exercise-9) 
