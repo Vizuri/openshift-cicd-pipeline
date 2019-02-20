@@ -12,3 +12,5 @@ The next step in the process is to publish the build artifact to our Nexus Repos
 	
 
 ```
+
+* Rebuild Project.

@@ -64,6 +64,11 @@ Confirm you can log into the Quay Container Registry
 
     >Note: Click on the **Advanced** button and click on the link: **Proceed to quay.apps.ocpws.kee.vizuri.com (unsafe)**
 
+    >Note: If asked, please confirm username by clicking on the *Confirm Username* button
+    
+    
+    <img src="../images/confirm_username.png" alt="confirm_username" width="40%">
+    
 ## Explore SonarQube
 
 Confirm you can log into the sonarqube console

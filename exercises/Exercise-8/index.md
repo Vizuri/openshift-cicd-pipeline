@@ -3,20 +3,13 @@ Add configuration to Deploy the image to OpenShift.
 Configure Jenkins OpenShift Client Plugin.  
 Get Jenkins Service Account Token from OpenShift to be used by the OpenShift Client Plugin.
 
-Log into the OpenShift Console.
-
-<{{ ocp_console_url }}>
-
-Navigate to the CICD Project.
-
-Choose Resources -> Secrets
-
-Locate one of the two jenkins-token-XXXXX secrets.
-
-Click to view the secret
-Click on Reveal the Secret to see the values.
-
-Copy the value of the Token to be used below.
+* Log into the OpenShift Console: <{{ ocp_console_url }}>
+* Navigate to the CICD Project.
+* Choose Resources -> Secrets
+* Locate one of the two jenkins-token-XXXXX secrets.
+* Click to view the secret
+* Click on Reveal the Secret to see the values.
+* Copy the value of the Token to be used below.
 
 In Jenkins, click on Manage Jenkins -> Configure System.  
 
@@ -32,28 +25,35 @@ Enter the following values:
 	* ID: ocp-ws
 	* Token: Past token retrieved above.
 
-![alt text](../images/image19.png)
+
+    <img src="../images/image19.png" alt="image19" width="40%">
 
 Click Add to create the new credential.
 
 Select the new credential in the credentials drop down.
 
-![alt text](../images/image6.png)
+
+    <img src="../images/image6.png" alt="image6" width="40%">
 
 Click Save to update the Jenkins Plugin.
 
-Update Jenkinsfile
-Add the following variables to the top of your Jenkinsfile.
+* Update Jenkinsfile by adding the following variables to the top of the Jenkinsfile for the *customer-service* project. 
+  Replacing the *Exercise 8 variable placeholder*  with the code below:
 
 ```
+
 def ocp_cluster = "ocp-ws"
 def ocpDevProject = "student-{{ student_number }}-customer-dev"
 def ocpTestProject = "student-{{ student_number }}-customer-test"
 def ocpProdProject = "student-{{ student_number }}-customer-prod"
-```
-The add the following to the bottom of the Jenkinsfile.
 
 ```
+
+* Add the following code to the bottom of the Jenkinsfile by replacing the *Exercise 8 placeholder*  with the code below:
+
+
+```
+
 	if (BRANCH_NAME ==~ /(develop)/) {
 		def ocp_project = ocpDevProject;
 		stage("Deploy Openshift ${ocp_project}") {
@@ -83,10 +83,13 @@ The add the following to the bottom of the Jenkinsfile.
 			}
 		}
     }
+    
 
 ```
-Return to the customer-service develop job and trigger a build.
 
-Once finished, you can log into OpenShift and navigate to the Customer Development project.  You should now have a customer POD running. 
+* Rebuild Project by returning to the customer-service develop job and trigger a build.
 
-![alt text](../images/image13.png)
+* Once finished, you can log into OpenShift and navigate to the Customer Development project.  You should now have a customer POD running. 
+
+
+    <img src="../images/image13.png" alt="image13" width="40%">

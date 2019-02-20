@@ -8,10 +8,10 @@ We will be using podman to build our container.
 
 ```
 
-def imageBase = "quay.{{ ocp_app_suffix }}";
-def imageNamespace = "student_{{ student_number }}";
-def registryUsername = "student-{{ student_number }}"
-def registryPassword = "{{ student_pwd }}"
+    def imageBase = "quay.{{ ocp_app_suffix }}";
+    def imageNamespace = "student_{{ student_number }}";
+    def registryUsername = "student-{{ student_number }}"
+    def registryPassword = "{{ student_pwd }}"
 
 ```
 
@@ -36,16 +36,22 @@ def registryPassword = "{{ student_pwd }}"
 	
 ```
 
+* Rebuild Project.
 * If you log into the Quay registry: <https://quay.{{ ocp_app_suffix }}>
   you will see your image. <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('https://quay.{{ ocp_app_suffix }}')" alt="copy-paste" width="20">
 
     * Username: `student-{{ student_number }}` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20">
     * Password: `{{ student_pwd }}` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20">
 
+    >Note: If asked, please confirm username by clicking on the *Confirm Username* button
     
-    <img src="../images/image8.png" alt="image8" width="40%">
     
-* Click on the customer repository then browse the tags.  Notice the Security Scan tag.  The image is queued for scanning.  Once complete you will see the results of the scan.  
+    <img src="../images/confirm_username.png" alt="confirm_username" width="40%">
+    
+* Click on the customer repository then browse the tags. 
+    * Notice the Security Scan tag.  
+    * The image is queued for scanning. 
+    * Once complete you will see the results of the scan.  
 
     
     <img src="../images/image8.png" alt="image8" width="40%">

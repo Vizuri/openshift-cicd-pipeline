@@ -27,7 +27,11 @@ SonarQube analyzes the source code for common issue and test coverage.  In this 
 * Rebuild Project.
 
 * Once complete, notice the *SonarQube* link on the left navigation.  
-  You can click this to see the results of the analysis.  
+
+    
+    <img src="../images/sonar_qube.png" alt="sonar_qube" width="50%">
+
+* You can click this to see the results of the analysis.  
 
 
-    <img src="../images/image8.png" alt="image8" width="40%">
+    <img src="../images/sonar_qube_overview.png" alt="sonar_qube_overview" width="50%">
