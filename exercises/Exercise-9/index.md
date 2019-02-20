@@ -1,23 +1,36 @@
-# Exercise 9 - Full Pipeline From Shared Library
-In this lab, you will build a complete CI/CD pipeline.  It builds Feature, Develop and Release Branch Jobs and Orchestrates a release from Dev->Test->Prod.
-Review Pipeline Library Functions.
-Browse openshift-cicd-pipeline github repository. 
+# Exercise 9 - Putting it all together
+In this lab, you will build a complete CI/CD pipeline utilizing a shared function library and declaring a reusable delivery pipeline passing in input parameters.  
 
-<https://github.com/Vizuri/openshift-cicd-pipeline>
+You can view the shared function library here:
+<https://github.com/Vizuri/openshift-cicd-pipeline/blob/master/src/com/vizuri/openshift/PipelineSteps.groovy>
 
-Navigate to src -> com -> vizuri -> openshift.
+You can view the reusable delivery pipeline here:
+<https://github.com/Vizuri/openshift-cicd-pipeline/blob/master/src/com/vizuri/openshift/JavaDeliveryPipeline.groovy>
 
-Review the functions in PipelineSteps.groovy.
+This reusable pipeline supports a Feature, Develop and Release Branch.
 
-Next review the Pipeline defined in JavaDeliveryPipeline.groovy.
+If the branch starts with feature/..., a featue pipeline is executed.
+This just builds and performs code analysis of the feature branch code.
 
-Update Jenkinsfile
+![alt text](../images/image15.png)
 
-Now back your Jenkinsfile to Jenkinsfile.BAC.
+If the branch is develop, a development pipeline is executed.
+This builds the code, performs code analysis, pushes the build artifact to nexus, builds a container, pushes it to a quay registry, deploys the container to an openshift development project and then run integratino tests on the deployed code.
+
+![alt text](../images/Image-101.png)
+
+If the branch starts with release/..., a release pipeline is executed.
+This builds the code, performs code analysis, pushes the build artifact to nexus, builds a container, pushes it to a quay registry, prompts the user to confirm deployment to test, deploys the container to an openshift test project, run integratino tests aginst test, promps the user to confirm a deployment to production, depoys the container to production and then runs integration tests against projection.
+
+![alt text](../images/Image-102.png)
+
+## Test Shared Library
+
+Backup your Jenkinsfile to Jenkinsfile.BAC.
 
 Update the Jenkins File with the following contents.
 
-```
+```bash
 #!/usr/bin/groovy
 @Library('github.com/vizuri/openshift-cicd-pipeline@master')
 
@@ -41,43 +54,16 @@ javaDeliveryPipeline {
 }
 ```
 
-Configure Gogs Jenkins WebHook
-Log into Gogs
+### Test Feature Branch
+Create a new branch called feature/Feature-1 in the Gogs Repository.  
 
-<http://gogs.{{ ocp_app_suffix }}>
+Fron the the Jenkins console, click on the Scan Multibranch Pipeline Now buttom.  This will scan the project for new branches and kick off the feature branch build.  Note that in practice a webhook should be configured to automatically trigger the build whan a new branch is created. 
 
-* Username: student-{{ student_number }}
-* Password: {{ student_pwd }}
+![alt text](../images/Image-103.png)
 
-Select the customer-service project.
+### Test Develop Branch
+Create a Pull Request and merge the Feature Branch into the Develop Branch.   Click on Scan Multibranch Pipeline Now button.  This will trigger the develop branch build.
 
-Click on the Settings link in the top right.
+### Release Develop Branch
+Create a release branch called release/1.0 from the develop branch.  Cick on Scan Multibranch Pipeline Now button.  This will trigger the develop branch build.  WHen prompted choose "Proceed" to deploy container to test and production environments.  
 
-Choose Webhooks.
-
-Click Add Webhook and select Gogs.
-
-Enter the following values.
-
-* Payload URL: http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}/gogs-webhook/?job=customer-service
-
-Click Save.
-
-Test Feature Branch
-Create a new branch called feature/Feature-1 in the Gogs Repository.
-
-Watch build trigger a new Feature build.
-
-The following steps will be executed.
-
-![alt text](../images/image15.png)
-
-Test Develop Branch
-Create a Pull Request and merge the Feature Branch into the Develop Branch.
-
-This will trigger the Develop branch build and deploy to development.
-
-Release Develop Branch
-Create a release branch called release/1.0
-
-This will trigger a release pipeline
