@@ -11,7 +11,18 @@ In this lab, you will create a Jenkins Pipeline Job that checks out a SpringBoot
 
 
 * Click on the customer-service repository.
-* Create a new file in the root of the customer-service repository called Jenkinsfile with the following contents.
+
+    
+    <img src="../images/customer_service.png" alt="customer_service" width="60%">
+
+* Create a new file in the root of the customer-service repository 
+   * Select the blue *New file*  button
+    
+        
+            <img src="../images/create_new_file.png" alt="create_new_file" width="60%">
+    
+   * Enter file name `Jenkinsfile` 
+   * Copy the contents into the new file.
 
 ```
 def app_name = "customer";
@@ -63,7 +74,6 @@ node ("maven-podman") {
 		withSonarQubeEnv('sonar') { sh "mvn -s configuration/settings.xml -Dnexus.url=${nexusUrl} -Dbuild.number=${release_number}  sonar:sonar" }
 	}
 
-
 	stage("Quality Gate"){
 		timeout(time: 1, unit: 'HOURS') {
 			def qg = waitForQualityGate()
@@ -79,38 +89,50 @@ node ("maven-podman") {
 }
 ```
 
+   * At the bottom click the green  *Commit Changes* button
+
 ## Configure Jenkins Job to Build Code
 
 * Log into [Jenkins](<http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}>) <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}')" alt="copy-paste" width="20">
 
-    * Username: 'student-{{ student_number }}'
-    * Password: '{{ student_pwd }}'
+    * Username: `student-{{ student_number }}` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20">
+    * Password: `{{ student_pwd }}` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20">
 
-* Click on *New Item*.
-
+* Click on *New Item* (top left).
 * Enter the following values:
 
     * Item Name: `customer-service`
-    * Choose: `Multibranch pipeline`
+    * and select at the bottom: `Multibranch pipeline`
+    * Click *OK*
 
 
     <img src="../images/image18.png" alt="image18" width="60%">
 
-Click OK to Create the customer-service project.
+* Click OK to Create the customer-service project.
 
-Under Branch Sources, click Add source->Git.
+* Under *Branch Sources* , click *Add Source* and select *Git*.
 
-Enter the following values:
+* Enter the following values:
 
-* Project repository: <http://gogs.{{ ocp_app_suffix }}/student-{{ student_number }}/customer-service.git>
-
-![alt text](../images/image16.png)
+    * Project repository: `http://gogs.{{ ocp_app_suffix }}/student-{{ student_number }}/customer-service.git` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://gogs.{{ ocp_app_suffix }}/student-{{ student_number }}/customer-service.git')" alt="copy-paste" width="20">
 
 
-Click Save.
+    <img src="../images/image16.png" alt="image16" width="60%">
 
-This will trigger a build of you develop branch.  Navigate to customer-service->develop to see the status of the build.
+
+* Click the *Save* button.
+
+* This will trigger a build of you develop branch.
+
+    
+    <img src="../images/jenkins_build.png" alt="jenkins_build" width="60%">
+
+* Navigate to Jenkins->customer-service->develop to see the status of the build.
+
+    
+    <img src="../images/jenkins_build_status.png" alt="jenkins_build_status" width="60%">
 
 The Job should execute three stages; Checkout, Build and Unit Test.
 
-![alt text](../images/image17.png)
+
+    <img src="../images/image17.png" alt="image17" width="60%">
