@@ -37,8 +37,11 @@ We will be using podman to build our container.
 ```
 
 * Rebuild Project by returning to the customer-service develop job and trigger a build.
-* If you log into the Quay registry: <https://quay.{{ ocp_app_suffix }}>
-  you will see your image. <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('https://quay.{{ ocp_app_suffix }}')" alt="copy-paste" width="20">
+
+    
+    <img src="../images/container_build_push.png" alt="container_build_push" width="40%">
+    
+* Log into the Quay registry: <https://quay.{{ ocp_app_suffix }}> <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('https://quay.{{ ocp_app_suffix }}')" alt="copy-paste" width="20">
 
     * Username: `student-{{ student_number }}` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20">
     * Password: `{{ student_pwd }}` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20">
@@ -48,10 +51,10 @@ We will be using podman to build our container.
     
     <img src="../images/confirm_username.png" alt="confirm_username" width="40%">
     
-* Click on the customer repository then browse the tags. 
+* Click *Repositories* and select the *customer* repository then browse the tags. 
     * Notice the Security Scan tag.  
     * The image is queued for scanning. 
     * Once complete you will see the results of the scan.  
 
     
-    <img src="../images/image8.png" alt="image8" width="40%">
+    <img src="../images/repository_tags.png" alt="repository_tags" width="40%">

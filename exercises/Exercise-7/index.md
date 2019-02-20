@@ -1,7 +1,7 @@
 # Exercise 7 - Scan Container Image
 In the next step, we will scan the newly created image for issues and known vulnerabilities.   We will be using the Jenkins Anchore Image Scanner for this task.
 
-* Add the following to the Jenkinsfile for the *customer-service* project 
+* Add the following to the end of the Jenkinsfile for the *customer-service* project 
   by replacing the *Exercise 7 placeholder*  with the code below:
 
 ```
@@ -20,4 +20,10 @@ In the next step, we will scan the newly created image for issues and known vuln
     
    >Note: This step can take up to 9 minutes to run! 
 
+    
     <img src="../images/image5.png" alt="image5" width="40%">
+    
+    
+   >Note: New vulnerability are found each day. If you are one of the lucky ones and your build faild.
+   Click on the *Anchore Report (FAIL)* on the left hand side and see what vulnerability was found.
+   

@@ -6,10 +6,10 @@ A) Navigate to the OpenShift Console
 
 <{{ ocp_console_url }}> <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ ocp_console_url }}')" alt="copy-paste" width="20">
 
-* Username: `student-{{ student_number }}` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20">
-* Password: `{{ student_pwd }}` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20">
-
-    >Note: Click on the **Advanced** button and click on the link: **Proceed to ocpws.kee.vizuri.com (unsafe)**
+   * Username: `student-{{ student_number }}` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20">
+   * Password: `{{ student_pwd }}` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20">
+ 
+     >Note: Click on the **Advanced** button and click on the link: **Proceed to ocpws.kee.vizuri.com (unsafe)**
     
 B) You have four projects pre-created for you (*Under My Projects on the right*)
 
@@ -20,10 +20,13 @@ B) You have four projects pre-created for you (*Under My Projects on the right*)
     * nexus - Nexus artifact reposigory
     * sonarqube - Code Quality Service
     * sonardb - Database for Code Quality Service
+    
 * Customer Development - Development Project
     * customerdb - Mongo Database for Development Service
+    
 * Customer Test - Test Project
     * customerdb - Mongo Database for Test Service
+    
 * Customer Prod - Production Project
     * customerdb - Mongo Database for Production Service
 
@@ -34,8 +37,8 @@ A) Confirm you can log into your jenkins console.
 
 <http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}> <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}')" alt="copy-paste" width="20">
 
-   * Username: `student-{{ student_number }}`
-   * Password: `{{ student_pwd }}`
+   * Username: `student-{{ student_number }}` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20">
+   * Password: `{{ student_pwd }}` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20">
 
      >Note: Click on the **Allow selected permissions** button the first time: <img src="../images/jenkins_accept.png" alt="jenkins_accept" width="500"> 
 
@@ -59,8 +62,8 @@ A) Confirm you can log into the Quay Container Registry
 
 <https://quay.{{ ocp_app_suffix }}/repository> <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('https://quay.{{ ocp_app_suffix }}/repository')" alt="copy-paste" width="20">
 
-   * Username: `student-{{ student_number }}`
-   * Password: `{{ student_pwd }}`
+   * Username: `student-{{ student_number }}` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20">
+   * Password: `{{ student_pwd }}` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20">
 
      >Note: Click on the **Advanced** button and click on the link: **Proceed to quay.apps.ocpws.kee.vizuri.com (unsafe)**
 
@@ -75,7 +78,7 @@ A) Confirm you can log into the sonarqube console
 
 <http://sonarqube-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}> <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://sonarqube-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}')" alt="copy-paste" width="20">
 
-   * Username: `admin`
+   * Username: `admin` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('admin')" alt="copy-paste" width="20">
    * Password: `admin`
 
 B) Should see the page: 
@@ -88,10 +91,10 @@ A) Confirm you can log into the gogs git server.
 
 <http://gogs.{{ ocp_app_suffix }}> <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://gogs.{{ ocp_app_suffix }}')" alt="copy-paste" width="20">
 
-   * Username: `student-{{ student_number }}`
-   * Password: `{{ student_pwd }}`
+   * Username: `student-{{ student_number }}` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20">
+   * Password: `{{ student_pwd }}` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20">
 
 B) You have one repository that we will use for the labs.
 
 C) Repositories:
-* customer-service - SpringBoot REST Web Service utilized as demo project to orchestrate through our CI/CD process.
+   * customer-service - SpringBoot REST Web Service utilized as demo project to orchestrate through our CI/CD process.

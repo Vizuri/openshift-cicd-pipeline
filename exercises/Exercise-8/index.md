@@ -1,51 +1,56 @@
 # Exercise 8: Deploy Image to OpenShift
-Add configuration to Deploy the image to OpenShift.  
-Configure Jenkins OpenShift Client Plugin.  
-Get Jenkins Service Account Token from OpenShift to be used by the OpenShift Client Plugin.
+Add configuration to Jenkins to Deploy the image to OpenShift.  
+ 
+A) First get the Jenkins Service Account Token from OpenShift to be used by the OpenShift Client Plugin.
 
-* Log into the OpenShift Console: <{{ ocp_console_url }}>
-* Navigate to the CICD Project.
-* Choose Resources -> Secrets
-* Locate one of the two jenkins-token-XXXXX secrets.
-* Click to view the secret
-* Click on Reveal the Secret to see the values.
-* Copy the value of the Token to be used below.
+   * Log into the OpenShift Console: <{{ ocp_console_url }}>
+   * Navigate to the CICD Project.
+   * Choose Resources -> Secrets
+   * Locate one of the two jenkins-token-XXXXX secrets.
+   * Click to view the secret
+   * Click on Reveal the Secret to see the values.
+   * Copy the value of the Token to be used below.
 
-In Jenkins, click on Manage Jenkins -> Configure System.  
+B) Configure Jenkins OpenShift Client Plugin. 
 
-Scroll down to the OpenShift Client Plugin Section.   Press the Add OpenShift Cluster button and choose OpenShift Cluster.
+   * In Jenkins, click on Manage Jenkins -> Configure System.  
+   * Scroll down to the OpenShift Client Plugin Section.   Press the Add OpenShift Cluster button and choose OpenShift Cluster.
 
-Enter the following values:
+   * Enter the following values:
+    
+        * Cluster name: `ocp-ws`
+        * API Server URL: `{{ ocp_console_url }}`
+        * Disable TLS Verify: `Check`
+        * Credentials: 
+            * Click Add and Select Jenkins to Create new Credentials.  
+        * Kind: `OpenShift Token for OpenShift Client Plugin`
+        * ID: `ocp-ws`
+        * Token: 
+          >Note: Past token retrieved above.
+    
+    
+        <img src="../images/image19.png" alt="image19" width="40%">
+    
+   * Click Add to create the new credential.
+    
+   * Select the new credential in the credentials drop down.
+    
+    
+        <img src="../images/image6.png" alt="image6" width="40%">
 
-* Cluster name: ocp-ws
-* API Server URL: <{{ ocp_console_url }}>
-* Disable TLS Verify: Check
-* Credentials: Click Add and Select Jenkins to Create new Credentials.  
-	* Kind: OpenShift Token for OpenShift Client Plugin
-	* ID: ocp-ws
-	* Token: Past token retrieved above.
+   * Click Save to update the Jenkins Plugin.
 
-
-    <img src="../images/image19.png" alt="image19" width="40%">
-
-Click Add to create the new credential.
-
-Select the new credential in the credentials drop down.
-
-
-    <img src="../images/image6.png" alt="image6" width="40%">
-
-Click Save to update the Jenkins Plugin.
-
-* Update Jenkinsfile by adding the following variables to the top of the Jenkinsfile for the *customer-service* project. 
-  Replacing the *Exercise 8 variable placeholder*  with the code below:
+D) Update Jenkinsfile
+ 
+   * Add the following variables to the top of the Jenkinsfile for the *customer-service* project. 
+     Replace the *Exercise 8 variable placeholder*  with the code below:
 
 ```
 
-def ocp_cluster = "ocp-ws"
-def ocpDevProject = "student-{{ student_number }}-customer-dev"
-def ocpTestProject = "student-{{ student_number }}-customer-test"
-def ocpProdProject = "student-{{ student_number }}-customer-prod"
+    def ocp_cluster = "ocp-ws"
+    def ocpDevProject = "student-{{ student_number }}-customer-dev"
+    def ocpTestProject = "student-{{ student_number }}-customer-test"
+    def ocpProdProject = "student-{{ student_number }}-customer-prod"
 
 ```
 

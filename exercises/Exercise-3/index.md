@@ -9,6 +9,7 @@ In this lab, you will create a Jenkins Pipeline Job that checks out a SpringBoot
     * Username: `student-{{ student_number }}` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20">
     * Password: `{{ student_pwd }}` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20">
 
+    >Note: Keep Gogs open in a new tab. You will returning to make many more updated between Jenkins builds
 
 * Click on the customer-service repository.
 
@@ -29,7 +30,7 @@ In this lab, you will create a Jenkins Pipeline Job that checks out a SpringBoot
     def app_name = "customer";
     def nexusUrl = "http://nexus-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}";
     def release_number;
-    
+      
     // Exercise 6 variable placeholder ...
     
     // Exercise 8 variable placeholder ...
