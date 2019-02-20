@@ -29,6 +29,8 @@ def app_name = "customer";
 def nexusUrl = "http://nexus-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}";
 def release_number;
 
+// Exercise 6 variable placeholder ...
+
 node ("maven-podman") {
 
 	stage('Checkout') {
@@ -70,22 +72,19 @@ node ("maven-podman") {
 			]])
 	}
 
-	stage('SonarQube Analysis') {
-		withSonarQubeEnv('sonar') { sh "mvn -s configuration/settings.xml -Dnexus.url=${nexusUrl} -Dbuild.number=${release_number}  sonar:sonar" }
-	}
-
-	stage("Quality Gate"){
-		timeout(time: 1, unit: 'HOURS') {
-			def qg = waitForQualityGate()
-			if (qg.status != 'OK') {
-				error "Pipeline aborted due to quality gate failure: ${qg.status}"
-			}
-		}
-	}
-
-	stage('Deploy Build Artifact') {
-		sh "mvn -s configuration/settings.xml -DskipTests=true -Dbuild.number=${release_number} -Dnexus.url=${nexusUrl} deploy"
-    }
+    
+    // Exercise 4 placeholder ...
+    
+    // Exercise 5 placeholder ...
+    
+    // Exercise 6 placeholder ...
+    
+    // Exercise 7 placeholder ...
+    
+    // Exercise 8 placeholder ...
+    
+    // Exercise 9 placeholder ...
+	
     
 }
 ```

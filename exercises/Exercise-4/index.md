@@ -1,25 +1,13 @@
 # Exercise 4 - Add Code Analysis
 SonarQube analyzes the source code for common issue and test coverage.  In this lab, you will add stages to perform analysis of you code.
 
-Edit the Jenkinsfile for the customer-service project and add the following two stages to the build pipeline after the Unit Test stage.
+* Edit the Jenkinsfile for the *customer-service* project by replacing the *Exercise 4 placeholder*  with the code below. 
+  This will add the following two stages to the build pipeline after the *Unit Test* stage:
+    * SonarQube Analysis
+    * Quality Gate
 
 ```
-...
-
-
-	stage ('Unit Test') {
-		sh "mvn -s configuration/settings.xml -Dnexus.url=${nexusUrl}  -Dbuild.number=${release_number} test"
-		junit "target/surefire-reports/*.xml"
-
-		 step([$class: 'XUnitBuilder',
-			thresholds: [
-				[$class: 'FailedThreshold', unstableThreshold: '1']
-			],
-			tools: [
-				[$class: "JUnitType", pattern: "target/surefire-reports/*.xml"]
-			]])
-	}
-
+	
 	stage('SonarQube Analysis') {
 		withSonarQubeEnv('sonar') { sh "mvn -s configuration/settings.xml -Dnexus.url=${nexusUrl} -Dbuild.number=${release_number}  sonar:sonar" }
 	}
@@ -34,12 +22,12 @@ Edit the Jenkinsfile for the customer-service project and add the following two 
 		}
 	}
 	
-	
-...
 ```
 
-Rebuild Project.
+* Rebuild Project.
 
-Once complete, notice the SonarQube link on the left navigation.  You can click this to see the results of the analysis.  
+* Once complete, notice the *SonarQube* link on the left navigation.  
+  You can click this to see the results of the analysis.  
 
-![alt text](../images/image8.png)
+
+    <img src="../images/image8.png" alt="image8" width="40%">
