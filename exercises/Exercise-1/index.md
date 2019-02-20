@@ -4,10 +4,10 @@
 
 A) Navigate to the OpenShift Console
 
-<{{ ocp_console_url }}> <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ ocp_console_url }}')" alt="copy-paste" width="20"></a>
+<{{ ocp_console_url }}> <a href="#"><a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ ocp_console_url }}')" alt="copy-paste" width="20"></a>
 
-   * Username: `student-{{ student_number }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20"></a>
-   * Password: `{{ student_pwd }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20"></a>
+   * Username: `student-{{ student_number }}` <a href="#"><a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20"></a>
+   * Password: `{{ student_pwd }}` <a href="#"><a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20"></a>
  
      >Note: Click on the **Advanced** button and click on the link: **Proceed to ocpws.kee.vizuri.com (unsafe)**
     
@@ -35,10 +35,10 @@ B) You have four projects pre-created for you (*Under My Projects on the right*)
 
 A) Confirm you can log into your jenkins console.  
 
-<http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}> <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}')" alt="copy-paste" width="20">
+<http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}> <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}')" alt="copy-paste" width="20"></a>
 
-   * Username: `student-{{ student_number }}` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20">
-   * Password: `{{ student_pwd }}` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20">
+   * Username: `student-{{ student_number }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20"></a>
+   * Password: `{{ student_pwd }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20"></a>
 
      >Note: Click on the **Allow selected permissions** button the first time: <img src="../images/jenkins_accept.png" alt="jenkins_accept" width="500"> 
 
@@ -50,7 +50,7 @@ B) Should see the message:
 
 A) Confirm you can navigate to nexus.
 
-<http://nexus-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}> <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://nexus-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}')" alt="copy-paste" width="20">
+<http://nexus-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}> <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://nexus-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}')" alt="copy-paste" width="20"></a>
 
 B) Should see the message: 
 
@@ -60,10 +60,10 @@ B) Should see the message:
 
 A) Confirm you can log into the Quay Container Registry
 
-<https://quay.{{ ocp_app_suffix }}/repository> <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('https://quay.{{ ocp_app_suffix }}/repository')" alt="copy-paste" width="20">
+<https://quay.{{ ocp_app_suffix }}/repository> <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('https://quay.{{ ocp_app_suffix }}/repository')" alt="copy-paste" width="20"></a>
 
-   * Username: `student-{{ student_number }}` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20">
-   * Password: `{{ student_pwd }}` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20">
+   * Username: `student-{{ student_number }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20"></a>
+   * Password: `{{ student_pwd }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20"></a>
 
      >Note: Click on the **Advanced** button and click on the link: **Proceed to quay.apps.ocpws.kee.vizuri.com (unsafe)**
 
@@ -76,9 +76,9 @@ A) Confirm you can log into the Quay Container Registry
 
 A) Confirm you can log into the sonarqube console
 
-<http://sonarqube-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}> <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://sonarqube-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}')" alt="copy-paste" width="20">
+<http://sonarqube-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}> <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://sonarqube-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}')" alt="copy-paste" width="20"></a>
 
-   * Username: `admin` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('admin')" alt="copy-paste" width="20">
+   * Username: `admin` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('admin')" alt="copy-paste" width="20"></a>
    * Password: `admin`
 
 B) Should see the page: 
@@ -89,10 +89,10 @@ B) Should see the page:
 
 A) Confirm you can log into the gogs git server.
 
-<http://gogs.{{ ocp_app_suffix }}> <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://gogs.{{ ocp_app_suffix }}')" alt="copy-paste" width="20">
+<http://gogs.{{ ocp_app_suffix }}> <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://gogs.{{ ocp_app_suffix }}')" alt="copy-paste" width="20"></a>
 
-   * Username: `student-{{ student_number }}` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20">
-   * Password: `{{ student_pwd }}` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20">
+   * Username: `student-{{ student_number }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20"></a>
+   * Password: `{{ student_pwd }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20"></a>
 
 B) You have one repository that we will use for the labs.
 

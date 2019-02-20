@@ -4,10 +4,10 @@ In this lab, you will create a Jenkins Pipeline Job that checks out a SpringBoot
 
 ## Create Jenkinsfile for Build
 
-* Sign into the Gogs (top right): <http://gogs.{{ ocp_app_suffix }}> <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://gogs.{{ ocp_app_suffix }}')" alt="copy-paste" width="20">
+* Sign into the Gogs (top right): <http://gogs.{{ ocp_app_suffix }}> <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://gogs.{{ ocp_app_suffix }}')" alt="copy-paste" width="20"></a>
 
-    * Username: `student-{{ student_number }}` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20">
-    * Password: `{{ student_pwd }}` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20">
+    * Username: `student-{{ student_number }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20"></a>
+    * Password: `{{ student_pwd }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20"></a>
 
     >Note: Keep Gogs open in a new tab. You will returning to make many more updated between Jenkins builds
 
@@ -98,10 +98,10 @@ In this lab, you will create a Jenkins Pipeline Job that checks out a SpringBoot
 
 ## Configure Jenkins Job to Build Code
 
-* Log into [Jenkins](<http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}>) <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}')" alt="copy-paste" width="20">
+* Log into [Jenkins](<http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}>) <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}')" alt="copy-paste" width="20"></a>
 
-    * Username: `student-{{ student_number }}` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20">
-    * Password: `{{ student_pwd }}` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20">
+    * Username: `student-{{ student_number }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20"></a>
+    * Password: `{{ student_pwd }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20"></a>
 
 * Click on *New Item* (top left).
 * Enter the following values:
@@ -119,7 +119,7 @@ In this lab, you will create a Jenkins Pipeline Job that checks out a SpringBoot
 
 * Enter the following values:
 
-    * Project repository: `http://gogs.{{ ocp_app_suffix }}/student-{{ student_number }}/customer-service.git` <img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://gogs.{{ ocp_app_suffix }}/student-{{ student_number }}/customer-service.git')" alt="copy-paste" width="20">
+    * Project repository: `http://gogs.{{ ocp_app_suffix }}/student-{{ student_number }}/customer-service.git` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://gogs.{{ ocp_app_suffix }}/student-{{ student_number }}/customer-service.git')" alt="copy-paste" width="20"></a>
 
 
     <img src="../images/image16.png" alt="image16" width="50%">
