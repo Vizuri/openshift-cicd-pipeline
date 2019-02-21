@@ -142,12 +142,9 @@ In this lab, you will create a Jenkins Pipeline Job that checks out a SpringBoot
     
     <img src="../images/develop_job.png" alt="develop_job" width="50%">
    
-   * Should see the build status: 
+   * The Job should execute three stages; Checkout, Build and Unit Test. 
     
     
-    <img src="../images/jenkins_build_status.png" alt="jenkins_build_status" width="20%">
+    <img src="../images/jenkins_build_status.png" alt="jenkins_build_status" width="40%">
 
-* The Job should execute three stages; Checkout, Build and Unit Test.
 
-    
-    <img src="../images/image17.png" alt="image17" width="40%">

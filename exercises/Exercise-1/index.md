@@ -66,9 +66,7 @@ A) Confirm you can log into the Quay Container Registry: <https://quay.{{ ocp_ap
     
 ## Explore SonarQube
 
-A) Confirm you can log into the sonarqube console
-
-<http://sonarqube-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}> <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://sonarqube-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}')" alt="copy-paste" width="20"></a>
+A) Confirm you can log into the sonarqube console: <http://sonarqube-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}> <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://sonarqube-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}')" alt="copy-paste" width="20"></a>
 
    * Username: `admin` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('admin')" alt="copy-paste" width="20"></a>
    * Password: `admin`
@@ -79,9 +77,7 @@ B) Should see the page:
 
 ## Explore Gogs (git repositories) 
 
-A) Confirm you can log into the gogs git server.
-
-<http://gogs.{{ ocp_app_suffix }}> <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://gogs.{{ ocp_app_suffix }}')" alt="copy-paste" width="20"></a>
+A) Confirm you can log into the gogs git server: <http://gogs.{{ ocp_app_suffix }}> <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://gogs.{{ ocp_app_suffix }}')" alt="copy-paste" width="20"></a>
 
    * Username: `student-{{ student_number }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20"></a>
    * Password: `{{ student_pwd }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20"></a>
