@@ -2,9 +2,7 @@
 
 ## Explore OpenShift Environment
 
-A) Navigate to the OpenShift Console
-
-<{{ ocp_console_url }}> <a href="#"><a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ ocp_console_url }}')" alt="copy-paste" width="20"></a>
+A) Navigate to the OpenShift Console: <{{ ocp_console_url }}> <a href="#"><a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ ocp_console_url }}')" alt="copy-paste" width="20"></a>
 
    * Username: `student-{{ student_number }}` <a href="#"><a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20"></a>
    * Password: `{{ student_pwd }}` <a href="#"><a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20"></a>
@@ -33,9 +31,7 @@ B) You have four projects pre-created for you (*Under My Projects on the right*)
 
 ## Explore Jenkins
 
-A) Confirm you can log into your jenkins console.  
-
-<http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}> <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}')" alt="copy-paste" width="20"></a>
+A) Confirm you can log into your jenkins console: <http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}> <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://jenkins-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}')" alt="copy-paste" width="20"></a>
 
    * Username: `student-{{ student_number }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20"></a>
    * Password: `{{ student_pwd }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20"></a>
@@ -48,9 +44,7 @@ B) Should see the message:
 
 ## Explore Nexus
 
-A) Confirm you can navigate to nexus.
-
-<http://nexus-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}> <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://nexus-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}')" alt="copy-paste" width="20"></a>
+A) Confirm you can navigate to nexus: <http://nexus-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}> <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://nexus-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}')" alt="copy-paste" width="20"></a>
 
 B) Should see the message: 
 
@@ -58,16 +52,14 @@ B) Should see the message:
 
 ## Explore Quay Registry 
 
-A) Confirm you can log into the Quay Container Registry
-
-<https://quay.{{ ocp_app_suffix }}/repository> <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('https://quay.{{ ocp_app_suffix }}/repository')" alt="copy-paste" width="20"></a>
+A) Confirm you can log into the Quay Container Registry: <https://quay.{{ ocp_app_suffix }}/repository> <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('https://quay.{{ ocp_app_suffix }}/repository')" alt="copy-paste" width="20"></a>
 
    * Username: `student-{{ student_number }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20"></a>
    * Password: `{{ student_pwd }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20"></a>
 
      >Note: Click on the **Advanced** button and click on the link: **Proceed to quay.apps.ocpws.kee.vizuri.com (unsafe)**
 
-     >Note: If asked, please confirm username by clicking on the *Confirm Username* button
+     >Note: If asked, you may have to confirm your username. So please click on the *Confirm Username* button when prompted
     
     
      <img src="../images/confirm_username.png" alt="confirm_username" width="40%">
@@ -94,7 +86,6 @@ A) Confirm you can log into the gogs git server.
    * Username: `student-{{ student_number }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20"></a>
    * Password: `{{ student_pwd }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20"></a>
 
-B) You have one repository that we will use for the labs.
+B) You have one repository that we will use for the labs:
 
-C) Repositories:
    * customer-service - SpringBoot REST Web Service utilized as demo project to orchestrate through our CI/CD process.

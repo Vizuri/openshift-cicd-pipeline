@@ -87,11 +87,12 @@ Create a new feature branch in the Gogs Repository and test it in Jenkins:
 
    * Should have a new job under *custom-service* called `feature/Feature1`
    
-    <img src="../images/feature_build.png" alt="feature_build" width="30%">
+    <img src="../images/feature_build.png" alt="feature_build" width="50%">
    
    
 ### Test Develop Branch
 Create a Pull Request and merge the Feature Branch into the Develop Branch. 
+   
    * Go back to Gogs and now complete the pull request:
     
     <img src="../images/pull_request.png" alt="pull_request" width="30%">  

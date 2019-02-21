@@ -39,7 +39,7 @@ A) In Jenkins, navigate to the Manage Jenkins
  * Scroll down to *Configure System*
  * Scroll down to the Cloud->Kubernetes section.
  * Notice the provided configurations.
- * Add our Podman Kubernetes Pod Template by clicking on the *Add Pod Template* button at the bottom of the page and choose *Kubernetes Pod Template*.
+ * Add our Podman *Kubernetes Pod Template* by clicking on the *Add Pod Template* button at the bottom of the page and choose *Kubernetes Pod Template*.
  * Enter the following values:
     * Name: `maven-podman` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('maven-podman')" alt="copy-paste" width="20"></a>
     * Labels `maven-podman`
@@ -55,7 +55,7 @@ A) In Jenkins, navigate to the Manage Jenkins
     * Docker Image: `docker.io/vizuri/podman:v1.0`
     * Working directory: `/tmp`
     * Command to run:   
-        >*Note: Clear Out The Contents of this Parameter*
+        >*IMPORTANT: Clear Out The Contents of this Parameter*
     * Arguments to pass to the command: `${computer.jnlpmac} ${computer.name}`
     * Click on *Advanced ...* and make sure the *Run in privileged mode* checkbox is selected
     
@@ -97,7 +97,7 @@ A) In Jenkins, navigate to the Manage Jenkins
  * Scroll down to the *SonarQube* servers section.
  * Click the *Add SonarQube* button.
  * Enter the following values:
-    * Name: `sonar`
+    * Name: `sonar` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('sonar')" alt="copy-paste" width="20"></a>
     * Server URL: `http://sonarqube-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://sonarqube-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}')" alt="copy-paste" width="20"></a>
 
     
@@ -107,9 +107,9 @@ A) In Jenkins, navigate to the Manage Jenkins
  * Click the *Add Sonar Instance* button
  * Enter the following values:
 
-    * Name: `sonar`
+    * Name: `sonar` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('sonar')" alt="copy-paste" width="20"></a>
     * SonarQube Server URL: `http://sonarqube-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://sonarqube-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}')" alt="copy-paste" width="20"></a>
-    * SonarQube account login: `admin`
+    * SonarQube account login: `admin` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('admin')" alt="copy-paste" width="20"></a>
     * SonarQube account password: `admin`
 
 
@@ -124,7 +124,7 @@ A) In Jenkins, navigate to the Manage Jenkins
     <http://sonarqube-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}> <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://sonarqube-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}')" alt="copy-paste" width="20"></a>
     
 * Click the Login button and enter:
-    * Username: `admin`
+    * Username: `admin` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('admin')" alt="copy-paste" width="20"></a>
     * Password: `admin`
     
 * And press the *Login* button. 

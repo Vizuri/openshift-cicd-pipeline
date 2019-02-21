@@ -87,9 +87,6 @@ In this lab, you will create a Jenkins Pipeline Job that checks out a SpringBoot
         
         // Exercise 8 placeholder ...
         
-        // Exercise 9 placeholder ...
-        
-        
     }
 
 ```
@@ -106,7 +103,7 @@ In this lab, you will create a Jenkins Pipeline Job that checks out a SpringBoot
 * Click on *New Item* (top left).
 * Enter the following values:
 
-    * Item Name: `customer-service`
+    * Item Name: `customer-service` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('customer-service')" alt="copy-paste" width="20"></a>
     * and select at the bottom: `Multibranch pipeline`
     * Click *OK*
 
@@ -132,8 +129,21 @@ In this lab, you will create a Jenkins Pipeline Job that checks out a SpringBoot
     
     <img src="../images/jenkins_build.png" alt="jenkins_build" width="60%">
 
-* Navigate to Jenkins->customer-service->develop to see the status of the build.
+* Navigate to the Jenkins job *develop* to see the status of the build.
 
+  * Go back to Jenkins
+  * Select the project *customer-service*:
+
+    
+    <img src="../images/custom_project.png" alt="custom_project" width="50%">
+    
+  * Then select the job *develop* job:  
+    
+    
+    <img src="../images/develop_job.png" alt="develop_job" width="50%">
+   
+   * Should see the build status: 
+    
     
     <img src="../images/jenkins_build_status.png" alt="jenkins_build_status" width="20%">
 
