@@ -28,4 +28,20 @@ In the next step, we will scan the newly created image for issues and known vuln
    Click on the *Anchore Report (FAIL)* on the left hand side and see what vulnerability was found. 
    To avoid the failure remove this new code from the Jenkinsfile and rebuild.
  
-   
+* Log into the Quay registry: <https://quay.{{ ocp_app_suffix }}> <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('https://quay.{{ ocp_app_suffix }}')" alt="copy-paste" width="20"></a>
+
+    * Username: `student-{{ student_number }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20"></a>
+    * Password: `{{ student_pwd }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20"></a>
+
+    >Note: If asked, please confirm username by clicking on the *Confirm Username* button
+    
+    
+    <img src="../images/confirm_username.png" alt="confirm_username" width="40%">
+    
+* Click *Repositories* and select the *customer* repository then browse the tags. 
+    * Notice the Security Scan tag.  
+    * The image is queued for scanning. 
+    * Once complete you will see the results of the scan.  
+
+    
+    <img src="../images/repository_tags.png" alt="repository_tags" width="60%">   
