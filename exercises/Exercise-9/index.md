@@ -12,7 +12,7 @@ This reusable pipeline supports a Feature, Develop and Release Branch.
 
    * If the branch starts with `feature/...`, a featue pipeline is executed. This just builds and performs code analysis of the feature branch code. 
 
-    <img src="../images/image15.png" alt="image15" width="50%">
+   ![image15](../images/image15.png){ width=50% }
 
    * If the branch is develop, a development pipeline is executed.
      This builds the code, performs code analysis, pushes the build artifact to nexus, 
@@ -36,6 +36,7 @@ This reusable pipeline supports a Feature, Develop and Release Branch.
 ```
 
     #!/usr/bin/groovy
+    
     @Library('github.com/vizuri/openshift-cicd-pipeline@master')
     
     def javaDeliveryPipeline = new com.vizuri.openshift.JavaDeliveryPipeline();
@@ -59,10 +60,25 @@ This reusable pipeline supports a Feature, Develop and Release Branch.
 
 ```
 
-### Test Feature Branch
-Create a new branch feature branch and test it in Jenkins:
+* Rebuild Project by returning to the customer-service develop job and trigger a build.
 
-   * Create a new branch called `feature/Feature-1` in the Gogs Repository.  
+### Test Feature Branch
+Create a new feature branch in the Gogs Repository and test it in Jenkins:
+
+   * To create a new branch you have to create a new file (call it *dummy.txt*).
+        * Add the text *dummy* inside the file
+        
+         <img src="../images/create_dummy_file.png" alt="create_dummy_file" width="30%">
+     
+   * Before you click on the *Commit Changes* button, change the default commmit option 
+     from *Commit directly ...* to *Create a new branch ...*
+           
+   * Enter the branch name `feature/Feature-1`. 
+     
+     >IMPORTANT: At this point do not perform a pull request yet
+    
+    <img src="../images/new_branch.png" alt="new_branch" width="30%">
+    
    * From the Jenkins console, click on the *Scan Multibranch Pipeline Now* link on the left. This will scan the project for new branches and kick off the feature branch build.  
 
      >Note that in practice a webhook should be configured to automatically trigger the build when a new branch is created. 
@@ -70,9 +86,21 @@ Create a new branch feature branch and test it in Jenkins:
     <img src="../images/scan_multibranch_pipeline.png" alt="scan_multibranch_pipeline" width="15%">
 
 ### Test Develop Branch
-Create a Pull Request and merge the Feature Branch into the Develop Branch.   
+Create a Pull Request and merge the Feature Branch into the Develop Branch. 
+   * Go back to Gogs and now complete the pull request:
+   
+    <img src="../images/pull_request.png" alt="pull_request" width="30%">  
 
-   * Click on *Scan Multibranch Pipeline Now* link on the left.  This will trigger the develop branch build.
+   * Now merge the pull request back into the *develop* branch:
+   
+    <img src="../images/merge_pull_request.png" alt="merge_pull_request" width="30%">
+
+   * After the merge is complete you should see this:
+   
+    <img src="../images/merge_complete.png" alt="merge_complete" width="30%">
+   
+   * Go back to Jenkins and click on *Scan Multibranch Pipeline Now* link on the left.  
+     This will trigger the develop branch build again.
 
 ### Release Develop Branch
 Create a release branch called release/1.0 from the develop branch.  
