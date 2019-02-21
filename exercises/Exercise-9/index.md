@@ -12,7 +12,7 @@ This reusable pipeline supports a Feature, Develop and Release Branch.
 
    * If the branch starts with `feature/...`, a featue pipeline is executed. This just builds and performs code analysis of the feature branch code. 
 
-   ![image15](../images/image15.png){ width=50% }
+    <img src="../images/image15.png" alt="image15" width="50%">
 
    * If the branch is develop, a development pipeline is executed.
      This builds the code, performs code analysis, pushes the build artifact to nexus, 
@@ -66,29 +66,34 @@ This reusable pipeline supports a Feature, Develop and Release Branch.
 Create a new feature branch in the Gogs Repository and test it in Jenkins:
 
    * To create a new branch you have to create a new file (call it *dummy.txt*).
-        * Add the text *dummy* inside the file
+   * Add the text *dummy* inside the file
         
-         <img src="../images/create_dummy_file.png" alt="create_dummy_file" width="30%">
+    <img src="../images/create_dummy_file.png" alt="create_dummy_file" width="30%">
      
    * Before you click on the *Commit Changes* button, change the default commmit option 
      from *Commit directly ...* to *Create a new branch ...*
            
    * Enter the branch name `feature/Feature-1`. 
-     
      >IMPORTANT: At this point do not perform a pull request yet
-    
+       
     <img src="../images/new_branch.png" alt="new_branch" width="30%">
     
-   * From the Jenkins console, click on the *Scan Multibranch Pipeline Now* link on the left. This will scan the project for new branches and kick off the feature branch build.  
+   * From the Jenkins console, go to the *custom-service* project and click on the *Scan Multibranch Pipeline Now* option on the left. 
+     This will scan the project for new branches and kick off the feature branch build.  
 
      >Note that in practice a webhook should be configured to automatically trigger the build when a new branch is created. 
 
     <img src="../images/scan_multibranch_pipeline.png" alt="scan_multibranch_pipeline" width="15%">
 
+   * Should have a new job under *custom-service* called `feature/Feature1`
+   
+    <img src="../images/feature_build.png" alt="feature_build" width="30%">
+   
+   
 ### Test Develop Branch
 Create a Pull Request and merge the Feature Branch into the Develop Branch. 
    * Go back to Gogs and now complete the pull request:
-   
+    
     <img src="../images/pull_request.png" alt="pull_request" width="30%">  
 
    * Now merge the pull request back into the *develop* branch:
