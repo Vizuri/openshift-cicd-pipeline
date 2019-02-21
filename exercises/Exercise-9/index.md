@@ -74,10 +74,12 @@ Create a new feature branch in the Gogs Repository and test it in Jenkins:
      from *Commit directly ...* to *Create a new branch ...*
            
    * Enter the branch name `feature/Feature-1`. 
-     >IMPORTANT: At this point do not perform a pull request yet
        
     <img src="../images/new_branch.png" alt="new_branch" width="30%">
     
+   * Click on the *Commit Changes* button
+     >IMPORTANT: At this point do not perform a pull request yet
+     
    * From the Jenkins console, go to the *custom-service* project and click on the *Scan Multibranch Pipeline Now* option on the left. 
      This will scan the project for new branches and kick off the feature branch build.  
 
@@ -120,15 +122,18 @@ Create a release branch called release/1.0 from the develop branch.
         from *Commit directly ...* to *Create a new branch ...*
               
    * Enter the branch name `release/1.0`. 
-     >IMPORTANT: At this point do not perform a pull request yet
    
     <img src="../images/new_release_branch.png" alt="new_release_branch" width="30%"> 
  
-   * Cick on *Scan Multibranch Pipeline Now* button.  
+   * Click on the *Commit Changes* button
+     >IMPORTANT: At this point do not perform a pull request yet
+     
+   * Go to Jenkins and cick on *Scan Multibranch Pipeline Now* button.  
      This will trigger a develop and release branch build.  
    
    * When prompted choose "Proceed" to deploy container to test and production environments.
-    
+ 
+### Complete the Pull Request of the release branch into the develop branch   
    * Go back to Gogs and now complete the pull request:
        
     <img src="../images/release_pull_request.png" alt="pull_request" width="30%">  
