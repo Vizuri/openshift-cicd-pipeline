@@ -21,7 +21,7 @@ In the next step, we will scan the newly created image for issues and known vuln
    >Note: This step can take up to 9 minutes to run! 
 
     
-    <img src="../images/image5.png" alt="image5" width="40%">
+    <img src="../images/anchore_report.png" alt="anchore_report" width="40%">
     
     
    >Note: New vulnerability are found each day. If you are one of the lucky ones and your build faild.
