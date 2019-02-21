@@ -109,8 +109,35 @@ Create a Pull Request and merge the Feature Branch into the Develop Branch.
      This will trigger the develop branch build again.
 
 ### Release Develop Branch
-Create a release branch called release/1.0 from the develop branch.  
- 
-   * Cick on *Scan Multibranch Pipeline Now* button.  This will trigger the develop branch build.  WHen prompted choose "Proceed" to deploy container to test and production environments. 
-    
+Create a release branch called release/1.0 from the develop branch. 
 
+   * To create a new branch you have to create a new file (call it *dummy_release.txt*).
+   * Add the text *dummy release* inside the file
+    
+    <img src="../images/create_dummy_release.png" alt="create_dummy_release" width="30%">
+        
+   * Before you click on the *Commit Changes* button, change the default commmit option 
+        from *Commit directly ...* to *Create a new branch ...*
+              
+   * Enter the branch name `release/1.0`. 
+     >IMPORTANT: At this point do not perform a pull request yet
+   
+    <img src="../images/new_release_branch.png" alt="new_release_branch" width="30%"> 
+ 
+   * Cick on *Scan Multibranch Pipeline Now* button.  
+     This will trigger a develop and release branch build.  
+   
+   * When prompted choose "Proceed" to deploy container to test and production environments.
+    
+   * Go back to Gogs and now complete the pull request:
+       
+    <img src="../images/release_pull_request.png" alt="pull_request" width="30%">  
+   
+   * Now merge the pull request back into the *develop* branch:
+      
+    <img src="../images/merge_release_pull_request.png" alt="merge_release_pull_request" width="30%"> 
+
+   * Cick on *Scan Multibranch Pipeline Now* button in Jenkins.
+     This will trigger a develop and release branch build.
+          
+    <img src="../images/release_build.png" alt="release_build" width="30%"> 
