@@ -24,7 +24,7 @@ It has two out-of-the-box Kubernetes Pod Templates for Jenkins jobs; maven and n
 
 We will be using podman to build our containers and pushing them to our container registry.  
 
-An image has already been build for this container.  It can be found at:
+An image has already been built for this container.  It can be found at:
 
 <https://docker.io/vizuri/podman:v1.0>
 
