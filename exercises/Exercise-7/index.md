@@ -24,9 +24,8 @@ In the next step, we will scan the newly created image for issues and known vuln
     <img src="../images/anchore_report.png" alt="anchore_report" width="40%">
     
     
-   >Note: New vulnerability are found each day. If you are one of the lucky ones and your build faild.
-   Click on the *Anchore Report (FAIL)* on the left hand side and see what vulnerability was found. 
-   To avoid the failure remove this new code from the Jenkinsfile and rebuild.
+   >Note: New vulnerabilities are found each day. If you are one of the lucky ones and your build failed, 
+    click on the *Anchore Report* (FAIL) on the left hand side and see what vulnerabilities were found. To avoid the failure, remove this new code from the Jenkinsfile and rebuild.
  
 * Log into the Quay registry: <https://quay.{{ ocp_app_suffix }}> <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('https://quay.{{ ocp_app_suffix }}')" alt="copy-paste" width="20"></a>
 

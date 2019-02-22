@@ -3,8 +3,8 @@
   connection: local
 
   vars:
-    students_start: 1
-    students_end: 1
+    students_start: 51
+    students_end: 51
     s3_state: absent
     workshop_dns_zone: kee.vizuri.com
     ec2_name_prefix: ocpws

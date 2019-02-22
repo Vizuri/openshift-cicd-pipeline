@@ -9,7 +9,7 @@ In this lab, you will create a Jenkins Pipeline Job that checks out a SpringBoot
     * Username: `student-{{ student_number }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20"></a>
     * Password: `{{ student_pwd }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20"></a>
 
-    >Note: Keep Gogs open in a new tab. You will returning to make many more updated between Jenkins builds
+    >Note: Keep Gogs open in a new tab. You will be returning to make many more updates between Jenkins builds.
 
 * Click on the customer-service repository.
 
@@ -23,7 +23,7 @@ In this lab, you will create a Jenkins Pipeline Job that checks out a SpringBoot
     <img src="../images/create_new_file.png" alt="create_new_file" width="60%">
     
    * Enter file name `Jenkinsfile` 
-   * Copy the contents into the new file.
+   * Copy the following contents into the new file:
 
 ```
 
@@ -110,9 +110,9 @@ In this lab, you will create a Jenkins Pipeline Job that checks out a SpringBoot
 
     <img src="../images/image18.png" alt="image18" width="40%">
 
-* Click OK to Create the customer-service project.
+* Click OK to create the customer-service project.
 
-* Under *Branch Sources* , click *Add Source* and select *Git*.
+* Under *Branch Sources*, click *Add Source* and select *Git*.
 
 * Enter the following values:
 
@@ -124,7 +124,7 @@ In this lab, you will create a Jenkins Pipeline Job that checks out a SpringBoot
 
 * Click the *Save* button.
 
-* This will trigger a build of you develop branch.
+* This will trigger a build of your develop branch.
 
     
     <img src="../images/jenkins_build.png" alt="jenkins_build" width="60%">

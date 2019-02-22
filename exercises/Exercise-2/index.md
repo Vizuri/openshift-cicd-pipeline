@@ -36,7 +36,7 @@ This container extends the OpenShift Maven image and just adds the podman binary
 
 A) In Jenkins, navigate to the Manage Jenkins 
 
- * Scroll down to *Configure System*
+ * Scroll down to *Configure System*.
  * Scroll down to the Cloud->Kubernetes section.
  * Notice the provided configurations.
  * Add our Podman *Kubernetes Pod Template* by clicking on the *Add Pod Template* button at the bottom of the page and choose *Kubernetes Pod Template*.
@@ -75,8 +75,8 @@ A) In Jenkins, navigate to the Manage Jenkins
 
 A) In Jenkins, navigate to the Manage Jenkins
  
- * Scroll down to *Configure System*
- * Scroll down to the *Anchore Plugin Mode*
+ * Scroll down to *Configure System*.
+ * Scroll down to the *Anchore Plugin Mode*.
  * Enter the following values:
 
     * Engine URL: `http://anchore-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('http://anchore-student-{{ student_number }}-cicd.{{ ocp_app_suffix }}')" alt="copy-paste" width="20"></a>
@@ -93,7 +93,7 @@ A) In Jenkins, navigate to the Manage Jenkins
 
 A) In Jenkins, navigate to the Manage Jenkins
  
- * Scroll down to *Configure System*
+ * Scroll down to *Configure System*.
  * Scroll down to the *SonarQube* servers section.
  * Click the *Add SonarQube* button.
  * Enter the following values:
@@ -103,8 +103,8 @@ A) In Jenkins, navigate to the Manage Jenkins
     
     <img src="../images/image9.png" alt="image9" width="60%">
 
- * Scroll down to the *Quality Gates - SonarQube*
- * Click the *Add Sonar Instance* button
+ * Scroll down to the *Quality Gates - SonarQube*.
+ * Click the *Add Sonar Instance* button.
  * Enter the following values:
 
     * Name: `sonar` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('sonar')" alt="copy-paste" width="20"></a>
@@ -117,7 +117,7 @@ A) In Jenkins, navigate to the Manage Jenkins
 
  * Click the *Save* button
 
-## Configure SonarQube Jenkins WebHook.
+## Configure SonarQube Jenkins WebHook
 
 * Login into your SonarQube Server.
 

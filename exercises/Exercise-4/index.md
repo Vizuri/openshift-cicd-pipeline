@@ -1,5 +1,5 @@
 # Exercise 4 - Add Code Analysis
-SonarQube analyzes the source code for common issue and test coverage.  In this lab, you will add stages to perform analysis of you code.
+SonarQube analyzes the source code for common issue and test coverage.  In this lab, you will add stages to perform analysis of your code.
 
 * Edit the Jenkinsfile for the *customer-service* project by replacing the *Exercise 4 placeholder*  with the code below. 
   This will add the following two stages to the build pipeline after the *Unit Test* stage:

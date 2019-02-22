@@ -15,16 +15,18 @@ This reusable pipeline supports a Feature, Develop and Release Branch.
     <img src="../images/image15.png" alt="image15" width="50%">
 
    * If the branch is develop, a development pipeline is executed.
-     This builds the code, performs code analysis, pushes the build artifact to nexus, 
-     builds a container, pushes it to a quay registry, deploys the container to an openshift development project and then run integratino tests on the deployed code.
+     This builds the code, performs code analysis, pushes the build artifact to Nexus, 
+     builds a container, pushes it to a Quay registry, deploys the container to an OpenShift 
+     development project and then runs integration tests on the deployed code.
 
     <img src="../images/Image-101.png" alt="Image-101" width="50%">
 
    * If the branch starts with release/..., a release pipeline is executed.
-     This builds the code, performs code analysis, pushes the build artifact to nexus, 
-     builds a container, pushes it to a quay registry, prompts the user to confirm deployment to test, 
-     deploys the container to an openshift test project, run integratino tests aginst test, 
-     promps the user to confirm a deployment to production, depoys the container to production and then runs integration tests against projection.
+     This builds the code, performs code analysis, pushes the build artifact to Nexus, 
+     builds a container, pushes it to a Quay registry, prompts the user to confirm 
+     deployment to test, deploys the container to an OpenShift test project, 
+     runs integration tests against test, prompts the user to confirm a deployment to production, 
+     deploys the container to production and then runs integration tests against production.
 
     <img src="../images/Image-102.png" alt="Image-102" width="50%">
 
@@ -87,7 +89,7 @@ Create a new feature branch in the Gogs Repository and test it in Jenkins:
 
     <img src="../images/scan_multibranch_pipeline.png" alt="scan_multibranch_pipeline" width="15%">
 
-   * Should have a new job under *custom-service* called `feature/Feature1`
+   * You should have a new job under *custom-service* called `feature/Feature1`
    
     <img src="../images/feature_build.png" alt="feature_build" width="50%">
    
@@ -128,7 +130,7 @@ Create a release branch called release/1.0 from the develop branch.
    * Click on the *Commit Changes* button
      >IMPORTANT: At this point do not perform a pull request yet
      
-   * Go to Jenkins and cick on *Scan Multibranch Pipeline Now* button.  
+   * Go to Jenkins and click on *Scan Multibranch Pipeline Now* button.  
      This will trigger a develop and release branch build.  
    
    * When prompted choose "Proceed" to deploy container to test and production environments.
