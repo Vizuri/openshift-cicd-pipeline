@@ -4,8 +4,8 @@
 
 A) Navigate to the OpenShift Console: <{{ ocp_console_url }}> <a href="#"><a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ ocp_console_url }}')" alt="copy-paste" width="20"></a>
 
-   * Username: `student-{{ student_number }}` <a href="#"><a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20"></a>
-   * Password: `{{ student_pwd }}` <a href="#"><a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20"></a>
+   * Username: `student-{{ student_number }}` <a href="#0"><a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20"></a>
+   * Password: `{{ student_pwd }}` <a href="#0"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20"></a>
  
      >Note: Click on the **Advanced** button and click on the link: **Proceed to ocpws.kee.vizuri.com (unsafe)**
     
@@ -71,6 +71,8 @@ A) Confirm you can log into the sonarqube console: <http://sonarqube-student-{{ 
    * Username: `admin` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('admin')" alt="copy-paste" width="20"></a>
    * Password: `admin`
 
+   >Note: If you are prompted to enter a token just click on *Skip this tutorial* in the top right. <img src="../images/skip_tutorial.png" alt="confirm_username" width="40%">
+    
 B) Should see the page: 
 
 <img src="../images/sonarqube_welcome.png" alt="sonarqube_welcome" width="500">
