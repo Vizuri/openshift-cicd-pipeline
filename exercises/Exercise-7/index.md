@@ -27,10 +27,10 @@ In the next step, we will scan the newly created image for issues and known vuln
    >Note: New vulnerabilities are found each day. If you are one of the lucky ones and your build failed, 
     click on the *Anchore Report* (FAIL) on the left hand side and see what vulnerabilities were found. To avoid the failure, remove this new code from the Jenkinsfile and rebuild.
  
-* Log into the Quay registry: <https://quay.{{ ocp_app_suffix }}> <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('https://quay.{{ ocp_app_suffix }}')" alt="copy-paste" width="20"></a>
+* Log into the Quay registry: <https://quay.{{ ocp_app_suffix }}> <a href="#0"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('https://quay.{{ ocp_app_suffix }}')" alt="copy-paste" width="20"></a>
 
-    * Username: `student-{{ student_number }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20"></a>
-    * Password: `{{ student_pwd }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20"></a>
+    * Username: `student-{{ student_number }}` <a href="#0"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20"></a>
+    * Password: `{{ student_pwd }}` <a href="#0"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20"></a>
 
     >Note: If asked, please confirm username by clicking on the *Confirm Username* button
     

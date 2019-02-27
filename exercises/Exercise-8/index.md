@@ -3,10 +3,10 @@ Add configuration to Jenkins to Deploy the image to OpenShift.
  
 A) First get the Jenkins Service Account Token from OpenShift to be used by the OpenShift Client Plugin.
 
-   * Log into the OpenShift Console: <{{ ocp_console_url }}> <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ ocp_console_url }}')" alt="copy-paste" width="20"></a>
+   * Log into the OpenShift Console: <{{ ocp_console_url }}> <a href="#0"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ ocp_console_url }}')" alt="copy-paste" width="20"></a>
                                                              
-     * Username: `student-{{ student_number }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20"></a>
-     * Password: `{{ student_pwd }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20"></a>
+     * Username: `student-{{ student_number }}` <a href="#0"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('student-{{ student_number }}')" alt="copy-paste" width="20"></a>
+     * Password: `{{ student_pwd }}` <a href="#0"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ student_pwd }}')" alt="copy-paste" width="20"></a>
   
        >Note: Click on the **Advanced** button and click on the link: **Proceed to ocpws.kee.vizuri.com (unsafe)**
      
@@ -32,12 +32,12 @@ B) Configure Jenkins OpenShift Client Plugin.
    * Press the *Add OpenShift Cluster* button and select *OpenShift Cluster*.
    * Enter the following values:
       
-      * Cluster name: `ocp-ws` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('ocp-ws')" alt="copy-paste" width="20"></a>
-      * API Server URL: `{{ ocp_console_url }}` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ ocp_console_url }}')" alt="copy-paste" width="20"></a>
+      * Cluster name: `ocp-ws` <a href="#0"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('ocp-ws')" alt="copy-paste" width="20"></a>
+      * API Server URL: `{{ ocp_console_url }}` <a href="#0"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('{{ ocp_console_url }}')" alt="copy-paste" width="20"></a>
       * Disable TLS Verify: `Check`
       * For Credentials click *Add* and select *Jenkins* to create new Credentials.
          * For *Kind* select: `OpenShift Token for OpenShift Client Plugin`
-         * For *ID*: `ocp-ws` <a href="#"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('ocp-ws')" alt="copy-paste" width="20"></a>
+         * For *ID*: `ocp-ws` <a href="#0"><img src="../images/copy-paste.jpeg" onclick="copyToClipboard('ocp-ws')" alt="copy-paste" width="20"></a>
          * For *Token*: 
            >Note: Paste the token retrieved above from OpenShift.
     
