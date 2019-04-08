@@ -1,10 +1,8 @@
 [all:vars]
-students_start=50
-students_end=55
+students_start=0
+students_end=0
 
 app_domain=apps.ocpws.kee.vizuri.com
-
-
 
 ansible_connection=ssh
 ansible_ssh_user=ec2-user
@@ -14,12 +12,22 @@ ansible_become=true
 
 
 [config]
-172.31.32.169 openshift_node_group_name='node-config-master-infra'
-#172.31.83.191 openshift_node_group_name='node-config-master-infra'
+172.31.42.244 openshift_node_group_name='node-config-master-infra'
 
 [nodes]
-172.31.32.169 openshift_node_group_name='node-config-master-infra'
-172.31.35.173 openshift_node_group_name='node-config-master-infra'
-172.31.34.165 openshift_node_group_name='node-config-master-infra'
+172.31.42.244 openshift_node_group_name='node-config-master-infra'
+172.31.33.194 openshift_node_group_name='node-config-master-infra'
+172.31.36.158 openshift_node_group_name='node-config-master-infra'
 
-172.31.38.147 openshift_node_group_name="node-config-compute"
+172.31.46.172 openshift_node_group_name="node-config-compute"
+172.31.42.67 openshift_node_group_name="node-config-compute"
+172.31.43.223 openshift_node_group_name="node-config-compute"
+172.31.36.241 openshift_node_group_name="node-config-compute"
+172.31.35.170 openshift_node_group_name="node-config-compute"
+172.31.37.67 openshift_node_group_name="node-config-compute"
+172.31.42.226 openshift_node_group_name="node-config-compute"
+172.31.45.221 openshift_node_group_name="node-config-compute"
+172.31.33.23 openshift_node_group_name="node-config-compute"
+172.31.47.177 openshift_node_group_name="node-config-compute"
+172.31.37.233 openshift_node_group_name="node-config-compute"
+172.31.47.107 openshift_node_group_name="node-config-compute"

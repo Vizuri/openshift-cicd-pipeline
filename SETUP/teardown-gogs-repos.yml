@@ -4,22 +4,12 @@
 
   vars:
     gogs_url: "http://gogs.apps.ocpws.kee.vizuri.com"
-    access_token: "63a4c301714053cb5763172e87120c4bb4a9b2b5"
+    access_token: "6333b54ffc4ec28da977ddad0a9e017fce4e0c72"
     repo_name: "customer-service"
-    students_start: 50 
-    students_end: 55 
+    students_start: 0
+    students_end: 0
 
   tasks:
-#  - name: Delete LDAP User
-#    ldap_entry:
-#      bind_dn: cn=Directory Manager
-#      bind_pw: P@ssw0rd
-#      server_uri: ldap://directory.kee.vizuri.com
-#      dn: "uid=student-{{ item }},ou=people,dc=vizuri,dc=com"
-#      state: absent
-#    with_items: "{{ lookup('sequence','start='+students_start|string + ' end='+students_end|string,wantlist=True) }}"
-
-
   - name: Delete Gogs User Repo
     uri:
       url: "{{ gogs_url }}/api/v1/repos/student-{{ item }}/{{ repo_name }}"

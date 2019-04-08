@@ -9,14 +9,13 @@ ansible-playbook -i hosts deploy-quay.yml
 look into change db user to admin user account
 rsh into postgresql pod:
 
-
-psql -U quay -d quay -c "CREATE EXTENSION pg_trgm"
+#psql -U quay -d quay -c "CREATE EXTENSION pg_trgm"
 psql
   \c quay
   CREATE EXTENSION pg_trgm;
 exit;
 
-http://quay-enterprise-quay-enterprise.apps.ocpdemo.kee.vizuri.com
+http://quay-enterprise-quay-enterprise.apps.ocpws.kee.vizuri.com
 
 When prompted enter quay database info:
 
@@ -40,11 +39,11 @@ quay-enterprise-redis
 
 Save
 
-Configure SSL
+Configure TLS
 ------------
 Admin Choose to configure SSL
 Set path to 
-quay.apps.ocpdemo.kee.vizuri.com
+quay.apps.ocpws.kee.vizuri.com
 
 upload certificates generated for quay.apps.ocpdemo.kee.vizuri.com
 
@@ -67,7 +66,7 @@ Choose LDAP
 
 URL: ldap://directory.kee.vizuri.com
 Base: dc=vizuri,dc=com
-People Pase: ou=People
+User Relative DS: ou=People
 
 User: cn=Directory Manager
 Password: ****
@@ -77,3 +76,9 @@ Clair Setup
 =======
 Make sure to update the clair.yaml file to point to the correct repo:  
 TODO: Need to generate the file
+http://clairsvc-quay-enterprise.apps.ocpws.kee.vizuri.com 
+
+Have service provider provide a key
+
+Security Scanner Endpoint:
+http://clairsvc-quay-enterprise.apps.ocpws.kee.vizuri.com 

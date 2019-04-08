@@ -4,7 +4,7 @@ ansible-playbook -i hosts setup-gogs.yml
 
 Login to gogs:
 
-http://gogs.apps.ocpdemo.kee.vizuri.com/
+http://gogs.apps.ocpws.kee.vizuri.com/
 
 Create new user to be admin user:
 USER: gogs-admin
@@ -19,8 +19,8 @@ Go to Authenticaton Settings and create LDAP connection:
       bind_dn            = cn=Directory Manager
       bind_password      = *****
       user_base          = ou=People,dc=vizuri,dc=com
+      user filter        = (&(objectClass=person)(uid=%s))
       attribute_mail     = mail
-      filter             = (&(objectClass=person)(uid=%s))
       user_uid           = uid
 
 

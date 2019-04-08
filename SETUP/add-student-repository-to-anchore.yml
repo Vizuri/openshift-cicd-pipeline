@@ -3,8 +3,8 @@
   connection: local
 
   vars:
-    students_start: 50
-    students_end: 55 
+    students_start: 0
+    students_end: 0
 
     registry: quay.apps.ocpws.kee.vizuri.com 
     student_pwd: workshop1!

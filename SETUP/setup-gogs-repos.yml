@@ -4,10 +4,10 @@
 
   vars:
     gogs_url: "gogs.apps.ocpws.kee.vizuri.com"
-    access_token: "63a4c301714053cb5763172e87120c4bb4a9b2b5"
+    access_token: "6333b54ffc4ec28da977ddad0a9e017fce4e0c72"
     repo_name: "customer-service"
-    students_start: 50
-    students_end: 55
+    students_start: 0
+    students_end: 0
 
   tasks:
   - name: Create Gogs User

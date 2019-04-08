@@ -1,0 +1,17 @@
+- name: Setup CI/CD Workshop Class
+  hosts: 127.0.0.1
+  connection: local
+
+  vars:
+    students_start: 0
+    students_end: 0
+
+  tasks:
+  - name: Delete LDAP User
+    ldap_entry:
+      bind_dn: cn=Directory Manager
+      bind_pw: P@ssw0rd
+      server_uri: ldap://directory.kee.vizuri.com
+      dn: "uid=student-{{ item }},ou=people,dc=vizuri,dc=com"
+      state: absent
+    with_items: "{{ lookup('sequence','start='+students_start|string + ' end='+students_end|string,wantlist=True) }}"
