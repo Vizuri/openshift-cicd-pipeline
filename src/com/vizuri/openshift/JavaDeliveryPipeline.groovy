@@ -49,7 +49,7 @@ def call(body) {
 					steps.integrationTestJava(pipelineParams.app_name, pipelineParams.ocp_dev_project, projectFolder)
 				}
 				if (BRANCH_NAME ==~ /(release.*)/) {
-					//steps.scanImage(pipelineParams.app_name, projectFolder )
+					steps.scanImage(pipelineParams.app_name, projectFolder )
 					steps.confirmDeploy(pipelineParams.app_name,pipelineParams.ocp_test_project)
 					steps.deployOpenshift(pipelineParams.ocp_test_cluster, pipelineParams.ocp_test_project, pipelineParams.app_name  )
 					steps.integrationTestJava(pipelineParams.app_name, pipelineParams.ocp_test_project, projectFolder)
